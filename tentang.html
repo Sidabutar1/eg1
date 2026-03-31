@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tentang Perusahaan: eg.1 Global</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: #f8f9fa;
+            color: #212529;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 950px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .main-header {
+            background-color: #0a2342; /* Dark Navy */
+            color: #ffffff;
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+        }
+
+        .main-header h1 {
+            margin: 0;
+            font-weight: 700;
+            font-size: 2.2em;
+        }
+        
+        .main-header p {
+            margin: 10px 0 0;
+            opacity: 0.9;
+        }
+
+        .nav-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #00b4d8;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .nav-button:hover {
+            background-color: #0096b3;
+            transform: translateY(-2px);
+        }
+
+        .main-content {
+            padding: 30px;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9ecef;
+            border-left: 5px solid #00b4d8; /* Light Blue/Cyan Accent */
+            margin-bottom: 30px;
+            padding: 25px;
+            border-radius: 8px;
+        }
+
+        .card h2 {
+            color: #0a2342; /* Dark Navy */
+            margin-top: 0;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            color: #0a2342;
+            margin-top: 25px;
+        }
+
+        .card ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .card ul li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .card ul li::before {
+            content: '»';
+            color: #00b4d8;
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .client-table {
+            width: 100%;
+            min-width: 600px; /* Memastikan tabel memiliki lebar minimum */
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .client-table th, .client-table td {
+            border: 1px solid #dee2e6;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .client-table th {
+            background-color: #0a2342;
+            color: white;
+            font-weight: 700;
+        }
+
+        .client-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch; /* for smooth scrolling on iOS */
+        }
+
+        /* --- RESPONSIVE DESIGN --- */
+        @media (max-width: 768px) {
+            body {
+                padding: 5px;
+            }
+            .main-header {
+                padding: 30px 15px;
+            }
+            .main-header h1 {
+                font-size: 1.8em;
+            }
+            .main-content {
+                padding: 15px;
+            }
+            .nav-button {
+                padding: 8px 15px;
+                font-size: 0.9em;
+            }
+            .card h2 {
+                font-size: 1.4em;
+            }
+        }
+
+        /* --- LANGUAGE SWITCHER --- */
+        .header-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+            margin-top: 20px;
+        }
+        .lang-switcher {
+            display: flex;
+            border: 1px solid #00b4d8;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .lang-btn {
+            background-color: transparent;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .lang-btn:hover {
+            background-color: #0096b3;
+        }
+        .lang-btn.active {
+            background-color: #00b4d8;
+        }
+
+        /* --- LANGUAGE TOGGLING --- */
+        .lang-en { display: none; }
+        body.lang-en-active .lang-id { display: none; }
+        body.lang-en-active .lang-en { display: inline; }
+        }
+
+        /* --- FOOTER & BACK-TO-TOP --- */
+        .site-footer {
+            text-align: center;
+            padding: 20px 30px;
+            color: #6c757d;
+            font-size: 0.9em;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #0a2342;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            font-size: 1.2em;
+            text-decoration: none;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s, background-color 0.3s;
+            z-index: 1000;
+        }
+        .back-to-top:hover {
+            background-color: #00b4d8;
+        }
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header class="main-header">
+            <h1><span class="lang-id">Profil Perusahaan: eg.1 Global</span><span class="lang-en">Firm Profile: eg.1 Global</span></h1>
+            <p><span class="lang-id">Bedah Mendalam Visi, Layanan, dan Kultur Perusahaan</span><span class="lang-en">In-Depth Breakdown of Vision, Services, and Culture</span></p>
+            <div class="header-controls">
+                <div class="lang-switcher">
+                    <button class="lang-btn" data-lang="id">ID</button>
+                    <button class="lang-btn" data-lang="en">EN</button>
+                </div>
+                <a href="index.html" class="nav-button"><span class="lang-id">← Kembali ke Papan Strategi</span><span class="lang-en">← Back to Strategy Dashboard</span></a>
+            </div>
+        </header>
+
+        <main class="main-content">
+            
+            <section class="card">
+                <h2>Profil Umum & Kepemimpinan</h2>
+                <h3>1. Visi, Misi, dan Motto</h3>
+                <ul>
+                    <li><strong>Motto:</strong> "Leading by example". Slogan ini mencerminkan fokus mereka pada kualitas kepemimpinan yang nyata dan autentik.</li>
+                    <li><strong>Visi & Fokus:</strong> Menjadi spesialis global dalam layanan profesional yang membantu klien mendorong pendapatan, membedakan diri dari kompetitor, dan merekrut talenta pemimpin pasar.</li>
+                    <li><strong>Misi:</strong> Memberikan wawasan berbasis data (data-driven insights) untuk membantu organisasi memahami lanskap kompetitif dan struktur talenta mereka.</li>
+                </ul>
+
+                <h3>2. Hierarki dan Pemeran Utama (Key Players)</h3>
+                <ul>
+                    <li><strong>Pendiri (Founder):</strong> Andrew Gray. Mendirikan eg.1 pada tahun 2003 dengan fokus awal pada penunjukan posisi senior.</li>
+                    <li><strong>Pemeran Kunci Lainnya:</strong> Jacob (Senior Associate, fokus pada Executive Search & M&A), Rick White (pemimpin divisi Aviation, Transport, & Travel).</li>
+                </ul>
+
+                <h3>3. Layanan Utama (Apa yang Mereka Lakukan)</h3>
+                <ul>
+                    <li><strong>Leadership Advisory:</strong> Menilai dan mengembangkan potensi kepemimpinan dalam perusahaan.</li>
+                    <li><strong>Market Intelligence:</strong> Menyediakan data pasar yang mendalam agar perusahaan tahu posisi mereka dibanding pesaing.</li>
+                    <li><strong>Executive Search:</strong> Mencari individu level C-Suite atau posisi kunci yang sulit ditemukan di pasar terbuka.</li>
+                </ul>
+            </section>
+
+            <section class="card">
+                <h2>Metodologi Kerja & Keunggulan Strategis</h2>
+                <h3>1. Metodologi Kerja: "The eg.1 Way"</h3>
+                <ul>
+                    <li><strong>Market Intelligence & Competitor Analysis:</strong> Melakukan pemetaan pasar secara menyeluruh sebelum mencari kandidat.</li>
+                    <li><strong>Identifikasi Talenta Pasif:</strong> Fokus pada "passive candidates"—individu sukses yang tidak sedang aktif mencari kerja.</li>
+                    <li><strong>The GC Index®:</strong> Menggunakan alat pemetaan talenta untuk memastikan keselarasan budaya.</li>
+                    <li><strong>Onboarding & Outplacement Terintegrasi:</strong> Memberikan layanan pendampingan bagi eksekutif baru dan yang keluar.</li>
+                </ul>
+
+                <h3>2. Keunggulan Strategis Lainnya</h3>
+                <ul>
+                    <li><strong>M&A Identification:</strong> Membantu klien mengidentifikasi target akuisisi yang sesuai.</li>
+                    <li><strong>Spesialisasi Sektor:</strong> Sangat kuat di bidang Layanan Profesional (hukum, akuntansi, konsultasi) serta sektor Teknologi & Digital.</li>
+                    <li><strong>Fokus pada Keberagaman (DEI):</strong> Membantu perusahaan membangun tim kepemimpinan yang lebih inklusif.</li>
+                </ul>
+            </section>
+
+            <section class="card">
+                <h2>Rekam Jejak & Reputasi</h2>
+                <h3>1. Klien-Klien Besar (Key Clients)</h3>
+                <p>eg.1 Global memiliki rekam jejak yang kuat dalam melayani firma layanan profesional, perusahaan energi, dan sektor teknologi global.</p>
+                <div class="table-responsive">
+                    <table class="client-table">
+                        <thead>
+                            <tr>
+                                <th>Sektor</th>
+                                <th>Nama Perusahaan</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Konsultasi Manajemen</td>
+                                <td>Deloitte, The Boston Consulting Group (BCG), Oliver Wyman, Mercer</td>
+                            </tr>
+                            <tr>
+                                <td>Layanan Keuangan</td>
+                                <td>Barclays, CPP Investment Board, Marsh & McLennan</td>
+                            </tr>
+                            <tr>
+                                <td>Energi & Infrastruktur</td>
+                                <td>BP (British Petroleum), Arcadis</td>
+                            </tr>
+                            <tr>
+                                <td>Kesehatan & Konsumer</td>
+                                <td>Pfizer, WeightWatchers, Charles River Associates</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>2. Reputasi di Mata Karyawan (Berdasarkan Glassdoor)</h3>
+                <ul>
+                    <li><strong>Sisi Positif:</strong> Dianggap sebagai tempat belajar yang sangat baik, tim yang cerdas, dan lingkungan kerja yang mendukung jiwa kewirausahaan (entrepreneurialism).</li>
+                    <li><strong>Sisi Kritik:</strong> Beberapa mantan karyawan menyebutkan adanya tantangan dalam hal kemajuan karier yang lambat dan gaya manajemen yang sangat mendetail (micromanagement).</li>
+                </ul>
+            </section>
+
+        </main>
+    </div>
+
+    <a href="#" class="back-to-top">↑</a>
+    <script>
+        // --- SCRIPT UNTUK BACK-TO-TOP ---
+        const backToTopButton = document.querySelector(".back-to-top");
+
+        window.addEventListener("scroll", () => {
+            if (window.pageYOffset > 300) { // Show button after 300px of scroll
+                backToTopButton.classList.add("show");
+            } else {
+                backToTopButton.classList.remove("show");
+            }
+        });
+
+        backToTopButton.addEventListener("click", (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        });
+
+        // --- SCRIPT UNTUK BAHASA ---
+        function setLanguage(lang) {
+            if (lang === 'en') {
+                document.body.classList.add('lang-en-active');
+            } else {
+                document.body.classList.remove('lang-en-active');
+            }
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+            localStorage.setItem('preferredLanguage', lang);
+        }
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => setLanguage(e.target.dataset.lang));
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('preferredLanguage') || 'id';
+            setLanguage(savedLang);
+        });
+    </script>
+</body>
+</html>
+
+        <footer class="site-footer">
+            © 2026 Interview Preparation Kit. by Sipino
+        </footer>
+    </div>
+
+    <a href="#" class="back-to-top">↑</a>
+    <script>
+        // --- SCRIPT UNTUK BACK-TO-TOP ---
+        const backToTopButton = document.querySelector(".back-to-top");
+
+        window.addEventListener("scroll", () => {
+            if (window.pageYOffset > 300) { // Show button after 300px of scroll
+                backToTopButton.classList.add("show");
+            } else {
+                backToTopButton.classList.remove("show");
+            }
+        });
+
+        backToTopButton.addEventListener("click", (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        });
+
+        // --- SCRIPT UNTUK BAHASA ---
+        function setLanguage(lang) {
+            if (lang === 'en') {
+                document.body.classList.add('lang-en-active');
+            } else {
+                document.body.classList.remove('lang-en-active');
+            }
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+            localStorage.setItem('preferredLanguage', lang);
+        }
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => setLanguage(e.target.dataset.lang));
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('preferredLanguage') || 'id';
+            setLanguage(savedLang);
+        });
+    </script>
+</body>
+</html>

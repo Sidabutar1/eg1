@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Pertanyaan Interview: eg.1 Global</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: #f8f9fa; /* Latar belakang abu-abu sangat terang */
+            color: #212529; /* Teks abu-abu gelap */
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 950px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .main-header {
+            background-color: #0a2342; /* Dark Navy */
+            color: #ffffff;
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+        }
+
+        .main-header h1 {
+            margin: 0;
+            font-weight: 700;
+            font-size: 2.2em;
+        }
+        
+        .main-header p {
+            margin: 10px 0 0;
+            opacity: 0.9;
+        }
+
+        .nav-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #00b4d8; /* Light Blue/Cyan Accent */
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .nav-button:hover {
+            background-color: #0096b3; /* Darker Cyan */
+            transform: translateY(-2px);
+        }
+
+        .main-content {
+            padding: 30px;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9ecef;
+            border-left: 5px solid #00b4d8; /* Light Blue/Cyan Accent */
+            margin-bottom: 30px;
+            padding: 25px;
+            border-radius: 8px;
+        }
+
+        .card h2 {
+            color: #0a2342; /* Dark Navy */
+            margin-top: 0;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .focus-text {
+            font-style: italic;
+            color: #6c757d; /* Medium Grey */
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        /* --- TAB CSS --- */
+        .tab-container {
+            display: flex;
+            flex-wrap: wrap;
+            background-color: #0a2342; /* Dark Navy */
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 25px;
+        }
+
+        .tab-button {
+            background-color: inherit;
+            color: white;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+            font-size: 1em;
+            font-weight: 700;
+            font-family: 'Lato', sans-serif;
+            flex-grow: 1;
+        }
+
+        .tab-button:hover {
+            background-color: #003b75; /* Lighter Navy for hover */
+        }
+
+        .tab-button.active {
+            background-color: #00b4d8; /* Light Blue/Cyan Accent */
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeEffect 0.5s;
+        }
+
+        @keyframes fadeEffect {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+
+        .controls {
+            margin-bottom: 20px;
+            text-align: right;
+        }
+        .controls button {
+            background-color: #0a2342; /* Dark Navy */
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-family: 'Lato', sans-serif;
+            transition: 0.3s;
+            margin-left: 10px;
+        }
+        .controls button:hover {
+            background-color: #003b75; /* Lighter Navy */
+        }
+
+        /* --- STYLING UNTUK AKORDION Q&A --- */
+        .qa-item {
+            background-color: #ffffff;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .qa-item:hover {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            border-color: #00b4d8; /* Light Blue/Cyan Accent */
+        }
+
+        .qa-item summary {
+            padding: 15px 20px;
+            font-weight: 700;
+            cursor: pointer;
+            background-color: #ffffff;
+            color: #0a2342; /* Dark Navy */
+            outline: none;
+            list-style: none; /* Sembunyikan panah default di beberapa browser */
+            position: relative;
+            padding-left: 45px;
+        }
+
+        .qa-item summary::-webkit-details-marker {
+            display: none; /* Sembunyikan panah default di Chrome/Safari */
+        }
+
+        /* Custom Icon Panah */
+        .qa-item summary::before {
+            content: '▶';
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #00b4d8; /* Light Blue/Cyan Accent */
+            font-size: 0.8em;
+            transition: transform 0.3s ease;
+        }
+
+        .qa-item[open] summary::before {
+            transform: translateY(-50%) rotate(90deg);
+        }
+
+        .qa-item[open] summary {
+            border-bottom: 1px dashed #e0e0e0;
+            background-color: #e7f5ff; /* Very Light Blue */
+            color: #0a2342; /* Dark Navy */
+        }
+
+        .answer-box {
+            padding: 15px 20px;
+            background-color: #ffffff;
+            color: #212529;
+            line-height: 1.6;
+        }
+        
+        .answer-box strong {
+            color: #4caf50; /* Warna hijau untuk menandakan ini adalah kunci jawaban yang bagus */
+        }
+
+        /* --- RESPONSIVE DESIGN --- */
+        @media (max-width: 768px) {
+            body {
+                padding: 5px;
+            }
+            .main-header {
+                padding: 30px 15px;
+            }
+            .main-header h1 {
+                font-size: 1.8em;
+            }
+            .main-content {
+                padding: 15px;
+            }
+            .nav-button, .controls button {
+                padding: 8px 15px;
+                font-size: 0.9em;
+            }
+            .card h2 {
+                font-size: 1.4em;
+            }
+        }
+
+        /* --- LANGUAGE SWITCHER --- */
+        .header-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+            margin-top: 20px;
+        }
+        .lang-switcher {
+            display: flex;
+            border: 1px solid #00b4d8;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .lang-btn {
+            background-color: transparent;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .lang-btn:hover {
+            background-color: #0096b3;
+        }
+        .lang-btn.active {
+            background-color: #00b4d8;
+        }
+
+        /* --- LANGUAGE TOGGLING --- */
+        .lang-en { display: none; }
+        body.lang-en-active .lang-id { display: none; }
+        body.lang-en-active .lang-en { display: inline; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header class="main-header">
+            <h1>Bank Pertanyaan & Jawaban</h1>
+            <p>Klik pada pertanyaan untuk melihat strategi jawaban terbaik.</p>
+            <a href="index.html" class="nav-button">← Kembali ke Papan Strategi</a>
+        </header>
+
+        <main class="main-content">
+            
+            <!-- --- NAVIGASI TAB --- -->
+            <div class="tab-container">
+                <button class="tab-button active" onclick="openTab(event, 'TabDougal')">Dougal Murray</button>
+                <button class="tab-button" onclick="openTab(event, 'TabGabriella')">Gabriella McDonnell</button>
+                <button class="tab-button" onclick="openTab(event, 'TabQing')">Qing Mak</button>
+            </div>
+
+            <div class="controls">
+                <button id="expandAll">Buka Semua</button>
+                <button id="collapseAll">Tutup Semua</button>
+            </div>
+
+            <!-- --- ISI TAB: DOUGAL MURRAY --- -->
+            <div id="TabDougal" class="tab-content" style="display: block;">
+                <section class="card">
+                    <h2>Dougal Murray (The Researcher)</h2>
+                    <span class="focus-text">Fokus: Risiko, Keberlanjutan, Teknis-Strategis, Data.</span>
+                    
+                    <details class="qa-item"><summary>1. Apa risiko terbesar industri tambang 5 tahun ke depan?</summary><div class="answer-box"><strong>Kunci Jawaban:</strong> Transisi energi dan Social License to Operate. Perusahaan harus membuktikan keberlanjutan untuk tetap mendapat pendanaan.</div></details>
+                    <details class="qa-item"><summary>2. Bagaimana menyeimbangkan produksi vs safety?</summary><div class="answer-box"><strong>Kunci Jawaban:</strong> Safety adalah bagian dari efisiensi. Tanpa safety, downtime dan biaya pemulihan akan jauh lebih besar dari target produksi.</div></details>
+                    <details class="qa-item"><summary>3. Pandangan Anda tentang ESG?</summary><div class="answer-box"><strong>Kunci Jawaban:</strong> Bukan sekadar laporan, tapi kerangka kerja untuk memitigasi risiko lingkungan dan sosial demi keuntungan jangka panjang.</div></details>
+                    <details class="qa-item"><summary>4. Jika ada insiden lingkungan, apa langkah pertama Anda?</summary><div class="answer-box"><strong>Kunci Jawaban:</strong> Containment (lokalisir dampak), pelaporan transparan sesuai regulasi, dan investigasi akar masalah (root cause).</div></details>
+                    <details class="qa-item"><summary>5. Bagaimana memitigasi risiko operasional tak terduga?</summary><div class="answer-box"><strong>Kunci Jawaban:</strong> Melalui Predictive Maintenance dan simulasi skenario terburuk secara berkala.</div></details>
+                    <details class="qa-item"><summary>6. Apa peran otomatisasi dalam mengurangi risiko?</summary><div class="answer-box"><strong>Kunci Jawaban:</strong> Mengurangi paparan manusia di area berbahaya, namun memerlukan pelatihan ulang (upskilling) untuk operator.</div></details>
+                    <details class="qa-item"><summary>7. Bagaimana memastikan kepatuhan regulasi yang berubah?</summary><div class="answer-box"><strong>Kunci Jawaban:</strong> Membangun hubungan proaktif dengan regulator dan memiliki tim kepatuhan yang adaptif.</div></details>
+                    <details class="qa-item"><summary>8. Bagaimana menilai efektivitas manajemen risiko?</summary><div class="answer-box"><strong>Kunci Jawaban:</strong> Dilihat dari penurunan frekuensi insiden dan seberapa cepat tim merespons deviasi standar.</div></details>
+                    <details class="qa-item"><summary>9. Pernahkah Anda menghentikan pekerjaan demi safety?</summary><div class="answer-box"><strong>Kunci Jawaban:</strong> Pernah, saat [Sebutkan Contoh spesifik Anda]. Nyawa karyawan lebih berharga daripada keterlambatan satu shift.</div></details>
+                    <details class="qa-item"><summary>10. Apa tantangan dekarbonisasi di site remote?</summary><div class="answer-box"><strong>Kunci Jawaban:</strong> Logistik energi terbarukan. Solusinya adalah transisi bertahap ke hybrid power (Solar/Diesel).</div></details>
+                    <details class="qa-item"><summary>11. Bagaimana mengelola limbah tambang (tailing)?</summary><div class="answer-box"><strong>Kunci Jawaban:</strong> Dengan standar internasional (seperti GISTM) untuk memastikan stabilitas bendungan dan pencegahan kebocoran.</div></details>
+                    <details class="qa-item"><summary>12. Apa metrik sukses bagi Anda?</summary><div class="answer-box"><strong>Kunci Jawaban:</strong> Tercapainya target produksi dengan Zero Harm dan kepatuhan lingkungan 100%.</div></details>
+                    <details class="qa-item"><summary>13. Bagaimana menghadapi konflik biaya vs keberlanjutan?</summary><div class="answer-box"><strong>Kunci Jawaban:</strong> Menjelaskan bahwa investasi keberlanjutan mencegah biaya hukum dan pemulihan yang jauh lebih mahal di masa depan.</div></details>
+                    <details class="qa-item"><summary>14. Apa itu Social License to Operate bagi Anda?</summary><div class="answer-box"><strong>Kunci Jawaban:</strong> Kepercayaan masyarakat. Tanpa itu, operasional teknis secanggih apa pun bisa terhenti.</div></details>
+                    <details class="qa-item"><summary>15. Bagaimana Anda melakukan audit internal?</summary><div class="answer-box"><strong>Kunci Jawaban:</strong> Dengan mencari bukti objektif, bukan mencari kesalahan orang, demi perbaikan berkelanjutan.</div></details>
+                    <details class="qa-item"><summary>16. Pandangan tentang reklamasi tambang?</summary><div class="answer-box"><strong>Kunci Jawaban:</strong> Harus direncanakan sejak hari pertama tambang dibuka, bukan saat tambang akan tutup.</div></details>
+                    <details class="qa-item"><summary>17. Bagaimana teknologi digital membantu riset Anda?</summary><div class="answer-box"><strong>Kunci Jawaban:</strong> Memungkinkan analisis data real-time untuk prediksi kegagalan lereng atau alat.</div></details>
+                    <details class="qa-item"><summary>18. Apa risiko dari supply chain global saat ini?</summary><div class="answer-box"><strong>Kunci Jawaban:</strong> Keterlambatan suku cadang. Solusinya adalah diversifikasi vendor dan manajemen stok kritis.</div></details>
+                    <details class="qa-item"><summary>19. Bagaimana mengelola penggunaan air di site?</summary><div class="answer-box"><strong>Kunci Jawaban:</strong> Melalui sistem closed-loop (sirkulasi ulang) untuk meminimalkan pengambilan air tanah.</div></details>
+                    <details class="qa-item"><summary>20. Mengapa Anda tertarik pada aspek risiko di EG1Global?</summary><div class="answer-box"><strong>Kunci Jawaban:</strong> Karena EG1Global dikenal memiliki standar integritas tinggi dalam mengelola aset kompleks.</div></details>
+                </section>
+            </div>
+
+            <!-- --- ISI TAB: GABRIELLA MCDONNELL --- -->
+            <div id="TabGabriella" class="tab-content">
+                <section class="card">
+                    <h2>Gabriella McDonnell (The Communicator)</h2>
+                    <span class="focus-text">Fokus: Kecerdasan Emosional, Kolaborasi, Adaptasi, Penyederhanaan Bahasa.</span>
+                    
+                    <details class="qa-item"><summary>1. Ceritakan diri Anda tanpa istilah teknis.</summary><div class="answer-box"><strong>Kunci Jawaban:</strong> Saya adalah pemecah masalah yang menjembatani kebutuhan lapangan dengan tujuan perusahaan melalui komunikasi yang jelas.</div></details>
+                    <details class="qa-item"><summary>2. Bagaimana menjelaskan data rumit ke orang awam?</summary><div class="answer-box"><strong>Kunci Jawaban:</strong> Menggunakan analogi sederhana dan fokus pada dampak "Mengapa ini penting bagi Anda?".</div></details>
+                    <details class="qa-item"><summary>3. Gaya komunikasi Anda dalam tim multikultural?</summary><div class="answer-box"><strong>Kunci Jawaban:</strong> Adaptif. Saya mendengarkan lebih banyak untuk memahami konteks budaya sebelum berbicara.</div></details>
+                    <details class="qa-item"><summary>4. Cara meyakinkan orang yang tidak setuju?</summary><div class="answer-box"><strong>Kunci Jawaban:</strong> Mengajak diskusi data secara objektif dan mencari titik temu yang menguntungkan kedua pihak.</div></details>
+                    <details class="qa-item"><summary>5. Bagaimana membangun hubungan dengan warga lokal?</summary><div class="answer-box"><strong>Kunci Jawaban:</strong> Hadir secara personal, mendengarkan keluhan mereka, dan menunjukkan empati yang tulus.</div></details>
+                    <details class="qa-item"><summary>6. Jika ada miskomunikasi pusat vs lapangan?</summary><div class="answer-box"><strong>Kunci Jawaban:</strong> Segera lakukan klarifikasi via telepon/tatap muka, hindari berdebat di email yang panjang.</div></details>
+                    <details class="qa-item"><summary>7. Cara menyampaikan berita buruk ke atasan?</summary><div class="answer-box"><strong>Kunci Jawaban:</strong> Sampaikan segera, jujur pada fakta, dan tawarkan minimal dua opsi solusi.</div></details>
+                    <details class="qa-item"><summary>8. Bagaimana Anda beradaptasi di lingkungan baru?</summary><div class="answer-box"><strong>Kunci Jawaban:</strong> Menjadi "spons"; mengamati budaya kerja, bertanya pada senior, dan cepat berkontribusi.</div></details>
+                    <details class="qa-item"><summary>9. Menghadapi rekan kerja yang sulit/toksik?</summary><div class="answer-box"><strong>Kunci Jawaban:</strong> Tetap profesional, fokus pada hasil kerja, dan tidak membawa konflik ke ranah pribadi.</div></details>
+                    <details class="qa-item"><summary>10. Apa arti kerja sama tim bagi Anda?</summary><div class="answer-box"><strong>Kunci Jawaban:</strong> Saling melengkapi kelemahan masing-masing untuk mencapai satu tujuan besar bersama.</div></details>
+                    <details class="qa-item"><summary>11. Cara memastikan instruksi dipahami bawahan?</summary><div class="answer-box"><strong>Kunci Jawaban:</strong> Meminta mereka menjelaskan kembali poin utama instruksi tersebut (feedback loop).</div></details>
+                    <details class="qa-item"><summary>12. Menjaga semangat tim saat krisis?</summary><div class="answer-box"><strong>Kunci Jawaban:</strong> Memberikan apresiasi kecil, tetap tenang sebagai pemimpin, dan memberikan harapan yang realistis.</div></details>
+                    <details class="qa-item"><summary>13. Menangani perbedaan pendapat di rapat?</summary><div class="answer-box"><strong>Kunci Jawaban:</strong> Memfasilitasi semua suara agar terdengar, lalu mengambil keputusan berdasarkan konsensus atau data.</div></details>
+                    <details class="qa-item"><summary>14. Merespons kritik pedas terhadap Anda?</summary><div class="answer-box"><strong>Kunci Jawaban:</strong> Menerimanya sebagai bahan evaluasi tanpa defensif, lalu membuktikannya dengan perbaikan kinerja.</div></details>
+                    <details class="qa-item"><summary>15. Presentasi proyek dalam 2 menit?</summary><div class="answer-box"><strong>Kunci Jawaban:</strong> Fokus pada: Masalah -> Solusi Anda -> Hasil nyata yang didapat.</div></details>
+                    <details class="qa-item"><summary>16. Membangun kepercayaan dengan mitra baru?</summary><div class="answer-box"><strong>Kunci Jawaban:</strong> Menepati janji-janji kecil terlebih dahulu untuk membangun kredibilitas jangka panjang.</div></details>
+                    <details class="qa-item"><summary>17. Pengalaman memediasi konflik?</summary><div class="answer-box"><strong>Kunci Jawaban:</strong> Saya fokus pada masalahnya, bukan orangnya, dan mencari solusi win-win.</div></details>
+                    <details class="qa-item"><summary>18. Cara memastikan transparansi di tim?</summary><div class="answer-box"><strong>Kunci Jawaban:</strong> Melalui meeting rutin yang terbuka dan dokumentasi yang bisa diakses semua anggota.</div></details>
+                    <details class="qa-item"><summary>19. Sosialisasi di site yang terisolasi?</summary><div class="answer-box"><strong>Kunci Jawaban:</strong> Menghargai waktu santai bersama, ikut dalam kegiatan sosial tim, dan bersikap rendah hati.</div></details>
+                    <details class="qa-item"><summary>20. Mengapa komunikasi itu vital untuk safety?</summary><div class="answer-box"><strong>Kunci Jawaban:</strong> Karena instruksi yang tidak jelas di tambang bisa berakibat fatal atau kecelakaan kerja.</div></details>
+                </section>
+            </div>
+
+            <!-- --- ISI TAB: QING MAK --- -->
+            <div id="TabQing" class="tab-content">
+                <section class="card">
+                    <h2>Qing Mak (The Strategist)</h2>
+                    <span class="focus-text">Fokus: Visi Bisnis, Kepemimpinan, Efisiensi, Pertumbuhan Jangka Panjang.</span>
+                    
+                    <details class="qa-item"><summary>1. Di mana posisi EG1Global di pasar saat ini?</summary><div class="answer-box"><strong>Kunci Jawaban:</strong> Pemain kunci yang sedang bertransformasi menjadi lebih hijau dan efisien melalui teknologi.</div></details>
+                    <details class="qa-item"><summary>2. Kontribusi Anda pada pertumbuhan perusahaan?</summary><div class="answer-box"><strong>Kunci Jawaban:</strong> Mengoptimalkan proses kerja yang saya pegang untuk mengurangi biaya operasional per ton.</div></details>
+                    <details class="qa-item"><summary>3. Strategi efisiensi tanpa korbankan kualitas?</summary><div class="answer-box"><strong>Kunci Jawaban:</strong> Lean management: Menghilangkan pemborosan (waste) dalam rantai nilai operasional.</div></details>
+                    <details class="qa-item"><summary>4. Cara mengelola talenta agar berkembang?</summary><div class="answer-box"><strong>Kunci Jawaban:</strong> Memberikan tantangan baru dan otonomi, namun tetap memberikan bimbingan (mentorship) berkala.</div></details>
+                    <details class="qa-item"><summary>5. Dampak fluktuasi harga komoditas ke strategi?</summary><div class="answer-box"><strong>Kunci Jawaban:</strong> Fokus pada kontrol biaya tetap agar perusahaan tetap profit meski harga pasar turun.</div></details>
+                    <details class="qa-item"><summary>6. Kepemimpinan yang efektif menurut Anda?</summary><div class="answer-box"><strong>Kunci Jawaban:</strong> Pemimpin yang mampu menciptakan pemimpin-pemimpin baru di bawahnya.</div></details>
+                    <details class="qa-item"><summary>7. Menghadapi disrupsi teknologi di tambang?</summary><div class="answer-box"><strong>Kunci Jawaban:</strong> Terbuka pada inovasi, melakukan pilot project, dan melatih staf agar fasih teknologi.</div></details>
+                    <details class="qa-item"><summary>8. Cara alokasi anggaran proyek jangka panjang?</summary><div class="answer-box"><strong>Kunci Jawaban:</strong> Berbasis ROI (Return on Investment) dan tingkat risiko strategis bagi masa depan perusahaan.</div></details>
+                    <details class="qa-item"><summary>9. Keputusan tersulit yang pernah diambil?</summary><div class="answer-box"><strong>Kunci Jawaban:</strong> [Sebutkan Contoh nyata], di mana saya harus memilih antara hasil instan atau stabilitas jangka panjang.</div></details>
+                    <details class="qa-item"><summary>10. Cara menyelaraskan tim dengan visi besar?</summary><div class="answer-box"><strong>Kunci Jawaban:</strong> Sering mengomunikasikan "Big Picture" perusahaan agar mereka tahu nilai dari pekerjaan harian mereka.</div></details>
+                    <details class="qa-item"><summary>11. Apa rencana 90 hari pertama Anda?</summary><div class="answer-box"><strong>Kunci Jawaban:</strong> 30 hari: Observasi; 60 hari: Identifikasi perbaikan; 90 hari: Eksekusi perubahan awal.</div></details>
+                    <details class="qa-item"><summary>12. Pandangan tentang pasar tambang Asia Pasifik?</summary><div class="answer-box"><strong>Kunci Jawaban:</strong> Wilayah dengan permintaan tinggi namun tantangan regulasi dan lingkungan yang semakin ketat.</div></details>
+                    <details class="qa-item"><summary>13. Strategi mempertahankan karyawan terbaik?</summary><div class="answer-box"><strong>Kunci Jawaban:</strong> Menciptakan budaya kerja yang menghargai prestasi dan memberikan jalur karier yang jelas.</div></details>
+                    <details class="qa-item"><summary>14. Bagaimana mengevaluasi kegagalan strategi?</summary><div class="answer-box"><strong>Kunci Jawaban:</strong> Melakukan Post-Mortem analisis: Apa yang salah? Apa yang bisa dipelajari? Jangan ulangi lagi.</div></details>
+                    <details class="qa-item"><summary>15. Pandangan tentang merger/akuisisi?</summary><div class="answer-box"><strong>Kunci Jawaban:</strong> Langkah cerdas jika ada sinergi operasional yang bisa menekan biaya secara signifikan.</div></details>
+                    <details class="qa-item"><summary>16. Cara mengelola ekspektasi pemegang saham?</summary><div class="answer-box"><strong>Kunci Jawaban:</strong> Memberikan hasil yang konsisten dan laporan perkembangan yang transparan serta jujur.</div></details>
+                    <details class="qa-item"><summary>17. Inovasi strategis yang pernah Anda buat?</summary><div class="answer-box"><strong>Kunci Jawaban:</strong> [Sebutkan Contoh nyata], misalnya digitalisasi pelaporan yang menghemat waktu administrasi 20%.</div></details>
+                    <details class="qa-item"><summary>18. Keseimbangan target jangka pendek vs panjang?</summary><div class="answer-box"><strong>Kunci Jawaban:</strong> Target pendek untuk menjaga cash flow, visi panjang untuk menjaga keberlangsungan bisnis.</div></details>
+                    <details class="qa-item"><summary>19. Kriteria memilih vendor/mitra strategis?</summary><div class="answer-box"><strong>Kunci Jawaban:</strong> Reputasi safety, keandalan teknis, dan kesamaan nilai dalam aspek keberlanjutan.</div></details>
+                    <details class="qa-item"><summary>20. Mengapa Anda kandidat terbaik untuk posisi ini?</summary><div class="answer-box"><strong>Kunci Jawaban:</strong> Karena saya memiliki kombinasi eksekusi teknis dan visi bisnis yang dibutuhkan EG1Global.</div></details>
+                </section>
+            </div>
+
+        </main>
+    </div>
+    
+    <script>
+        document.getElementById('expandAll').addEventListener('click', function() {
+            const details = document.querySelectorAll('.qa-item');
+            details.forEach(detail => {
+                detail.open = true;
+            });
+        });
+
+        document.getElementById('collapseAll').addEventListener('click', function() {
+            const details = document.querySelectorAll('.qa-item');
+            details.forEach(detail => {
+                detail.open = false;
+            });
+        });
+
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            
+            // Sembunyikan semua elemen dengan class="tab-content"
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            
+            // Hapus class "active" dari semua elemen dengan class="tab-button"
+            tablinks = document.getElementsByClassName("tab-button");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            
+            // Tampilkan tab saat ini, dan tambahkan class "active" ke tombol yang membuka tab
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+
+        // --- SCRIPT UNTUK BAHASA ---
+        function setLanguage(lang) {
+            if (lang === 'en') {
+                document.body.classList.add('lang-en-active');
+            } else {
+                document.body.classList.remove('lang-en-active');
+            }
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+            localStorage.setItem('preferredLanguage', lang);
+        }
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => setLanguage(e.target.dataset.lang));
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('preferredLanguage') || 'id';
+            setLanguage(savedLang);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Papan Strategi Interview: eg.1 Global</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: #f8f9fa; /* Latar belakang abu-abu sangat terang */
+            color: #212529; /* Teks abu-abu gelap */
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 950px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .main-header {
+            background-color: #0a2342; /* Dark Navy */
+            color: #ffffff;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .main-header h1 {
+            margin: 0;
+            font-weight: 700;
+            font-size: 2.5em;
+        }
+
+        .header-logo {
+            max-height: 80px;
+            margin-bottom: 15px;
+        }
+
+        .main-content {
+            padding: 30px;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9ecef;
+            border-left: 5px solid #00b4d8; /* Light Blue/Cyan Accent */
+            margin-bottom: 25px;
+            padding: 20px;
+            border-radius: 8px;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .card h2 {
+            color: #0a2342; /* Dark Navy */
+            margin-top: 0;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        .card ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .card ul li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .card ul li::before {
+            content: '✓';
+            color: #0a2342; /* Dark Navy */
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        /* --- TAB CSS --- */
+        .tab-container {
+            display: flex;
+            flex-wrap: wrap;
+            background-color: #0a2342; /* Dark Navy */
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 25px;
+        }
+
+        .tab-button {
+            background-color: inherit;
+            color: white;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+            font-size: 1em;
+            font-weight: 700;
+            font-family: 'Lato', sans-serif;
+            flex-grow: 1;
+        }
+
+        .tab-button:hover {
+            background-color: #003b75; /* Lighter Navy for hover */
+        }
+
+        .tab-button.active {
+            background-color: #00b4d8; /* Light Blue/Cyan Accent */
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeEffect 0.5s;
+        }
+
+        @keyframes fadeEffect {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+
+        .profile-header-tab {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .profile-pic-small {
+            width: 150px; /* Ukuran diperbesar */
+            height: 150px; /* Ukuran diperbesar */
+            border-radius: 50%;
+            border: 5px solid #0a2342; /* Dark Navy */
+            object-fit: cover;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .profile-header-tab h2 {
+            margin: 0;
+            color: #0a2342; /* Dark Navy */
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .profile-header-tab p {
+            margin: 5px 0 0;
+            font-weight: 700;
+            color: #6c757d; /* Medium Grey */
+        }
+
+        /* --- TABEL CSS --- */
+        .strategy-table {
+            width: 100%;
+            min-width: 800px; /* Memastikan tabel memiliki lebar minimum */
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 0.95em;
+        }
+
+        .strategy-table th, .strategy-table td {
+            border: 1px solid #d7ccc8;
+            padding: 12px 15px;
+            text-align: left;
+        }
+
+        .strategy-table th {
+            background-color: #0a2342; /* Dark Navy */
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        .strategy-table tbody tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        .warning-card {
+            background-color: #fff3e0;
+            border-left-color: #ffc107;
+        }
+
+        .nav-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #00b4d8; /* Light Blue/Cyan Accent */
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .nav-button:hover {
+            background-color: #0096b3; /* Darker Cyan */
+            transform: translateY(-2px);
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch; /* for smooth scrolling on iOS */
+        }
+
+        /* --- RESPONSIVE DESIGN --- */
+        @media (max-width: 768px) {
+            body {
+                padding: 5px;
+            }
+            .main-header {
+                padding: 30px 15px;
+            }
+            .main-header h1 {
+                font-size: 1.8em;
+            }
+            .main-content {
+                padding: 15px;
+            }
+            .nav-button {
+                padding: 8px 15px;
+                font-size: 0.9em;
+            }
+            .card h2 {
+                font-size: 1.4em;
+            }
+            .tab-button {
+                font-size: 0.9em;
+            }
+        }
+
+        /* --- LANGUAGE SWITCHER --- */
+        .header-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+            margin-top: 20px;
+        }
+        .lang-switcher {
+            display: flex;
+            border: 1px solid #00b4d8;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .lang-btn {
+            background-color: transparent;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .lang-btn:hover {
+            background-color: #0096b3;
+        }
+        .lang-btn.active {
+            background-color: #00b4d8;
+        }
+
+        /* --- LANGUAGE TOGGLING --- */
+        .lang-en { display: none; }
+        body.lang-en-active .lang-id { display: none; }
+        body.lang-en-active .lang-en { display: inline; }
+        }
+
+        /* --- FOOTER & BACK-TO-TOP --- */
+        .site-footer {
+            text-align: center;
+            padding: 20px 30px;
+            color: #6c757d;
+            font-size: 0.9em;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #0a2342;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            font-size: 1.2em;
+            text-decoration: none;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s, background-color 0.3s;
+            z-index: 1000;
+        }
+        .back-to-top:hover {
+            background-color: #00b4d8;
+        }
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header class="main-header">
+            <img src="eg_1_logo.jpeg" alt="eg.1 Global Logo" class="header-logo">
+            <h1><span class="lang-id">Papan Strategi Interview: eg.1 Global</span><span class="lang-en">Interview Strategy Dashboard: eg.1 Global</span></h1>
+            <div class="header-controls">
+                <div class="lang-switcher">
+                    <button class="lang-btn" data-lang="id">ID</button>
+                    <button class="lang-btn" data-lang="en">EN</button>
+                </div>
+                <a href="tentang.html" class="nav-button"><span class="lang-id">Tentang Perusahaan</span><span class="lang-en">About The Firm</span></a>
+                <a href="hotsidabutar.html" class="nav-button"><span class="lang-id">Profil Strategis</span><span class="lang-en">Strategic Profile</span></a>
+                <a href="pertanyaan.html" class="nav-button"><span class="lang-id">Bank Pertanyaan →</span><span class="lang-en">Question Bank →</span></a>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <!-- --- NAVIGASI TAB --- -->
+            <div class="tab-container">
+                <button class="tab-button active" onclick="openTab(event, 'TabStrategy')"><span class="lang-id">Strategi Umum</span><span class="lang-en">General Strategy</span></button>
+                <button class="tab-button" onclick="openTab(event, 'TabDougal')"><span class="lang-id">Dougal Murray</span><span class="lang-en">Dougal Murray</span></button>
+                <button class="tab-button" onclick="openTab(event, 'TabGabriella')"><span class="lang-id">Gabriella McDonnell</span><span class="lang-en">Gabriella McDonnell</span></button>
+                <button class="tab-button" onclick="openTab(event, 'TabQing')"><span class="lang-id">Qing Mak</span><span class="lang-en">Qing Mak</span></button>
+            </div>
+
+            <!-- --- ISI TAB: STRATEGI UMUM --- -->
+            <div id="TabStrategy" class="tab-content" style="display: block;">
+                <section class="card">
+                    <h2><span class="lang-id">Bedah Perusahaan & Strategi</span><span class="lang-en">Firm & Strategy Breakdown</span></h2>
+                
+                <h3><span class="lang-id">Model Bisnis & Layanan Utama</span><span class="lang-en">Business Model & Key Services</span></h3>
+                <ul>
+                    <li><strong>Growth Advisory:</strong> <span class="lang-id">Memberikan wawasan pasar dan strategi untuk mendorong pendapatan klien (firma layanan profesional).</span><span class="lang-en">Providing market insights and strategies to drive client revenue (professional services firms).</span></li>
+                    <li><strong>Executive Search:</strong> <span class="lang-id">Mencari dan merekrut talenta level senior/pemimpin.</span><span class="lang-en">Sourcing and securing senior-level or leadership talent.</span></li>
+                    <li><strong>Leadership Advisory:</strong> <span class="lang-id">Membantu para pemimpin perusahaan menjadi lebih efektif.</span><span class="lang-en">Helping company leaders become more effective.</span></li>
+                    <li><strong><span class="lang-id">Sektor Kuat</span><span class="lang-en">Strong Sectors</span>:</strong> <span class="lang-id">Teknologi & Digital, Keuangan, serta firma hukum/akuntansi besar.</span><span class="lang-en">Technology & Digital, Finance, and major law/accounting firms.</span></li>
+                </ul>
+
+                <h3 style="margin-top: 30px;"><span class="lang-id">Senjata Rahasia: "The GC Index®"</span><span class="lang-en">Secret Weapon: "The GC Index®"</span></h3>
+                <p><span class="lang-id">eg.1 Global memiliki metodologi unik yang mereka banggakan bernama The GC Index (The Game-Changing Index). Ini adalah bahasa "wajib" mereka. Jika Anda menggunakan istilah ini saat interview, mereka akan menganggap Anda "satu frekuensi".</span><span class="lang-en">eg.1 Global has a unique methodology they pride themselves on called The GC Index (The Game-Changing Index). This is their "mandatory" language. If you use this term during the interview, they will consider you "on the same wavelength."</span></p>
+                <p><span class="lang-id">Saat interview, identifikasi diri Anda menggunakan 1 dari 5 tipe profil GC Index ini (pilih yang paling cocok dengan gaya kerja Anda di tambang):</span><span class="lang-en">During the interview, identify yourself using one of these 5 GC Index profile types (choose the one that best fits your work style in mining):</span></p>
+                <ul>
+                    <li><strong>The Game Changer:</strong> <span class="lang-id">Orang yang penuh ide baru (Contoh: "Saya mengubah metode pembuangan limbah di site X menjadi lebih efisien").</span><span class="lang-en">A person full of new ideas (Example: "I changed the waste disposal method at site X to be more efficient").</span></li>
+                    <li><strong>The Strategist:</strong> <span class="lang-id">Orang yang melihat gambaran besar (Contoh: "Saya bisa memprediksi tren harga emas dan dampaknya pada operasional 5 tahun ke depan").</span><span class="lang-en">A person who sees the big picture (Example: "I can predict gold price trends and their impact on operations over the next 5 years").</span></li>
+                    <li><strong>The Implementer:</strong> <span class="lang-id">Orang yang "bisa kerja" dan menyelesaikan tugas (Contoh: "Apapun kondisinya, target produksi tercapai"). &lt;-- Biasanya orang tambang kuat di sini.</span><span class="lang-en">A person who "gets things done" and completes tasks (Example: "Whatever the conditions, production targets are met"). &lt;-- Mining professionals are typically strong here.</span></li>
+                    <li><strong>The Polisher:</strong> <span class="lang-id">Orang yang perfeksionis dan terus memperbaiki detail.</span><span class="lang-en">A perfectionist who continuously improves details.</span></li>
+                    <li><strong>The Play Maker:</strong> <span class="lang-id">Orang yang menyatukan tim agar bekerja harmonis.</span><span class="lang-en">A person who brings the team together to work harmoniously.</span></li>
+                </ul>
+                <p><strong><span class="lang-id">Tips</span><span class="lang-en">Tip</span>:</strong> <span class="lang-id">Katakan pada mereka: "Saya telah membaca tentang pendekatan GC Index kalian, dan saya merasa profil saya adalah campuran kuat antara Implementer dan Strategist, yang sangat dibutuhkan dalam proyek tambang yang kompleks."</span><span class="lang-en">Tell them: "I've read about your GC Index approach, and I feel my profile is a strong mix of an Implementer and a Strategist, which is crucial for complex mining projects."</span></p>
+
+                <h3 style="margin-top: 30px;"><span class="lang-id">Kultur & Nilai Perusahaan (5 Pilar)</span><span class="lang-en">Company Culture & Values (5 Pillars)</span></h3>
+                <p><span class="lang-id">Gunakan pilar ini untuk membingkai jawaban Anda tentang kecocokan budaya:</span><span class="lang-en">Use these pillars to frame your answers about cultural fit:</span></p>
+                <ul>
+                    <li><strong>Principled:</strong> <span class="lang-id">Tunjukkan integritas dan kejujuran dalam pengalaman kerja Anda.</span><span class="lang-en">Demonstrate integrity and honesty in your work experience.</span></li>
+                    <li><strong>Resourceful:</strong> <span class="lang-id">Ceritakan saat Anda memecahkan masalah dengan cara kreatif dan rasa ingin tahu yang tinggi.</span><span class="lang-en">Tell a story about when you solved a problem creatively with a high sense of curiosity.</span></li>
+                    <li><strong>Driven:</strong> <span class="lang-id">Tunjukkan semangat dan gairah terhadap hasil kerja, bukan sekadar "menyelesaikan tugas".</span><span class="lang-en">Show passion and enthusiasm for results, not just "completing tasks."</span></li>
+                    <li><strong>Purposeful:</strong> <span class="lang-id">Berikan contoh nyata dan terukur (angka/persentase) dari pencapaian Anda.</span><span class="lang-en">Provide real, measurable examples (numbers/percentages) of your achievements.</span></li>
+                    <li><strong>Humble:</strong> <span class="lang-id">Ceritakan pengalaman menerima masukan atau mengutamakan kesuksesan tim di atas ego pribadi.</span><span class="lang-en">Share an experience of receiving feedback or prioritizing team success over personal ego.</span></li>
+                </ul>
+            </section>
+
+            <section class="card">
+                <h2><span class="lang-id">Kebutuhan Talenta & Posisi Umum</span><span class="lang-en">Talent Needs & Common Positions</span></h2>
+                <p><span class="lang-id">eg.1 Global sering mencari talenta di berbagai bidang, menunjukkan kebutuhan mereka akan keahlian yang beragam:</span><span class="lang-en">eg.1 Global often seeks talent in various fields, indicating their need for diverse expertise:</span></p>
+                <ul>
+                    <li><strong><span class="lang-id">Operasi & Strategi</span><span class="lang-en">Operations & Strategy</span>:</strong> Head of Operations, Project Manager, Client Manager.</li>
+                    <li><strong><span class="lang-id">Keuangan & Data</span><span class="lang-en">Finance & Data</span>:</strong> Group Finance Manager, FP&A Manager, Financial Controller, Pricing Analyst.</li>
+                    <li><strong><span class="lang-id">Teknologi</span><span class="lang-en">Technology</span>:</strong> Information Security Officer, Site Reliability Engineer, Cloud Architect.</li>
+                    <li><strong><span class="lang-id">Pencarian Bakat</span><span class="lang-en">Talent Acquisition</span>:</strong> Talent Acquisition Specialist, Internal Recruiter.</li>
+                    <li><strong><span class="lang-id">Kepemimpinan</span><span class="lang-en">Leadership</span>:</strong> Vice President, Director.</li>
+                </ul>
+            </section>
+
+            <section class="card">
+                <h2><span class="lang-id">Memahami Peran: Apa Itu Advisor di eg.1 Global?</span><span class="lang-en">Understanding the Role: What is an Advisor at eg.1 Global?</span></h2>
+                <p><span class="lang-id">Secara sederhana, Advisor adalah seorang penasihat ahli atau konsultan yang memberikan saran strategis berdasarkan pengalaman dan pengetahuan mendalam di bidang tertentu. Jika dikaitkan dengan konteks eg.1 Global, peran advisor di sana sangat spesifik. Berikut adalah bedahannya:</span><span class="lang-en">Simply put, an Advisor is an expert consultant who provides strategic advice based on deep experience and knowledge in a specific field. In the context of eg.1 Global, the advisor role is very specific. Here's the breakdown:</span></p>
+                
+                <h3 style="margin-top: 30px;"><span class="lang-id">1. Apa yang Mereka Lakukan?</span><span class="lang-en">1. What Do They Do?</span></h3>
+                <p><span class="lang-id">Seorang advisor tidak hanya memberi tahu "apa" yang harus dilakukan, tapi "bagaimana" melakukannya dengan risiko terkecil. Di perusahaan seperti eg.1, mereka membantu direktur atau pemilik perusahaan untuk:</span><span class="lang-en">An advisor doesn't just say "what" to do, but "how" to do it with the least risk. At a firm like eg.1, they help directors or company owners to:</span></p>
+                <ul>
+                    <li><strong><span class="lang-id">Mengambil Keputusan Sulit</span><span class="lang-en">Make Tough Decisions</span>:</strong> <span class="lang-id">Misalnya, apakah perusahaan harus melakukan merger atau ekspansi ke negara baru.</span><span class="lang-en">For example, whether the company should merge or expand into a new country.</span></li>
+                    <li><strong><span class="lang-id">Mencari Celah Pasar</span><span class="lang-en">Find Market Gaps</span>:</strong> <span class="lang-id">Memberitahu klien di mana posisi lawan dan bagaimana cara menyalip mereka.</span><span class="lang-en">Telling clients where their competitors stand and how to overtake them.</span></li>
+                    <li><strong><span class="lang-id">Menilai Orang</span><span class="lang-en">Assess People</span>:</strong> <span class="lang-id">Menentukan apakah seorang kandidat direktur cocok dengan budaya perusahaan atau tidak.</span><span class="lang-en">Determining if a director candidate is a good cultural fit for the company.</span></li>
+                </ul>
+
+                <h3 style="margin-top: 30px;"><span class="lang-id">2. Perbedaan Advisor vs. Karyawan Biasa</span><span class="lang-en">2. Advisor vs. Regular Employee</span></h3>
+                <ul>
+                    <li><strong><span class="lang-id">Karyawan</span><span class="lang-en">Employee</span>:</strong> <span class="lang-id">Fokus pada eksekusi tugas harian (operasional).</span><span class="lang-en">Focuses on executing daily tasks (operational).</span></li>
+                    <li><strong>Advisor:</strong> <span class="lang-id">Fokus pada pandangan jangka panjang (strategis). Mereka biasanya bekerja berdasarkan proyek atau kontrak khusus.</span><span class="lang-en">Focuses on the long-term view (strategic). They usually work on a project or special contract basis.</span></li>
+                </ul>
+
+                <h3 style="margin-top: 30px;"><span class="lang-id">3. Jenis-Jenis Advisor di Dunia Bisnis</span><span class="lang-en">3. Types of Advisors in Business</span></h3>
+                <ul>
+                    <li><strong>Strategic Advisor:</strong> <span class="lang-id">Membantu arah tujuan besar perusahaan (seperti yang dilakukan eg.1).</span><span class="lang-en">Helps with the company's major goals (like what eg.1 does).</span></li>
+                    <li><strong>Financial Advisor:</strong> <span class="lang-id">Mengelola keuangan, investasi, dan risiko pajak.</span><span class="lang-en">Manages finances, investments, and tax risks.</span></li>
+                    <li><strong>Technical Advisor:</strong> <span class="lang-id">Ahli di bidang teknologi (misal: transisi ke AI atau Cloud).</span><span class="lang-en">An expert in technology (e.g., transitioning to AI or Cloud).</span></li>
+                    <li><strong>Legal Advisor:</strong> <span class="lang-id">Memastikan semua langkah perusahaan aman secara hukum.</span><span class="lang-en">Ensures all company steps are legally sound.</span></li>
+                </ul>
+
+                <h3 style="margin-top: 30px;"><span class="lang-id">4. Kenapa Perusahaan Besar Butuh Advisor?</span><span class="lang-en">4. Why Do Big Companies Need Advisors?</span></h3>
+                <p><span class="lang-id">Perusahaan seperti Deloitte atau BP (klien eg.1) merekrut advisor karena mereka butuh sudut pandang objektif dari luar. Terkadang, orang di dalam perusahaan terlalu dekat dengan masalah sehingga tidak bisa melihat solusi yang jelas. Jadi, dalam hierarki eg.1 Global, para Senior Associates atau Partners bertindak sebagai advisor bagi perusahaan-perusahaan raksasa dunia tersebut.</span><span class="lang-en">Companies like Deloitte or BP (eg.1's clients) hire advisors because they need an objective outside perspective. Sometimes, people inside the company are too close to a problem to see a clear solution. Thus, within eg.1 Global's hierarchy, the Senior Associates or Partners act as advisors to these global giants.</span></p>
+
+                <h3 style="margin-top: 30px;"><span class="lang-id">Fokus Peran Anda Nanti</span><span class="lang-en">The Focus of Your Future Role</span></h3>
+                <p><span class="lang-id">Mengingat eg.1 adalah firma leadership advisory dan executive search papan atas di London, peran Anda kemungkinan besar akan berfokus pada salah satu dari hal berikut:</span><span class="lang-en">Given that eg.1 is a top-tier leadership advisory and executive search firm in London, your role will likely focus on one of the following:</span></p>
+                <ul>
+                    <li><strong>Market Intelligence:</strong> <span class="lang-id">Memberikan analisis mendalam tentang industri tertentu (misalnya pasar Indonesia atau Asia Tenggara) untuk membantu klien mereka melakukan ekspansi.</span><span class="lang-en">Providing in-depth analysis of a specific industry (e.g., the Indonesian or Southeast Asian market) to help their clients expand.</span></li>
+                    <li><strong>Executive Search & Networking:</strong> <span class="lang-id">Menghubungkan talenta-talenta level C-Suite (CEO, CTO, CFO) dengan perusahaan global klien mereka.</span><span class="lang-en">Connecting C-Suite level talent (CEO, CTO, CFO) with their global client companies.</span></li>
+                    <li><strong>Strategic Advisory:</strong> <span class="lang-id">Memberikan saran langsung kepada pimpinan perusahaan klien terkait struktur organisasi atau transformasi bisnis.</span><span class="lang-en">Providing direct advice to client company leadership regarding organizational structure or business transformation.</span></li>
+                </ul>
+
+                <h3 style="margin-top: 30px;"><span class="lang-id">Tips untuk Hari-Hari Pertama Anda</span><span class="lang-en">Tips for Your First Days</span></h3>
+                <ul>
+                    <li><strong><span class="lang-id">Pahami "The GC Index"</span><span class="lang-en">Understand "The GC Index"</span>:</strong> <span class="lang-id">Karena eg.1 sering menggunakan metodologi ini, pelajari bagaimana instrumen ini mengukur kontribusi orang dalam organisasi. Ini akan sering muncul dalam diskusi tim.</span><span class="lang-en">Since eg.1 frequently uses this methodology, learn how this instrument measures individual contributions within an organization. It will come up often in team discussions.</span></li>
+                    <li><strong><span class="lang-id">Koneksi Global</span><span class="lang-en">Global Connection</span>:</strong> <span class="lang-id">Anda akan bekerja dengan tim di London atau wilayah lain. Pastikan Anda siap dengan standar profesionalisme tinggi dan komunikasi yang sangat data-driven (berbasis data).</span><span class="lang-en">You will be working with teams in London or other regions. Be prepared for high professional standards and highly data-driven communication.</span></li>
+                    <li><strong><span class="lang-id">Kerahasiaan (Confidentiality)</span><span class="lang-en">Confidentiality</span>:</strong> <span class="lang-id">Sebagai Advisor, Anda akan menangani informasi sensitif mengenai rencana perusahaan besar atau pergerakan eksekutif top. Menjaga kerahasiaan adalah kunci reputasi di sini.</span><span class="lang-en">As an Advisor, you will handle sensitive information about major company plans or top executive movements. Maintaining confidentiality is key to your reputation here.</span></li>
+                </ul>
+            </section>
+
+            <section class="card">
+                <h2><span class="lang-id">Tips Strategis untuk Interview</span><span class="lang-en">Strategic Interview Tips</span></h2>
+                <ul>
+                    <li><strong><span class="lang-id">Gunakan Metode STAR</span><span class="lang-en">Use the STAR Method</span>:</strong> <span class="lang-id">Siapkan cerita pengalaman dengan format <strong>S</strong>ituation, <strong>T</strong>ask, <strong>A</strong>ction, <strong>R</strong>esult. Ini sangat efektif untuk menjawab pertanyaan berbasis perilaku.</span><span class="lang-en">Prepare experience stories using the <strong>S</strong>ituation, <strong>T</strong>ask, <strong>A</strong>ction, <strong>R</strong>esult format. This is highly effective for answering behavioral questions.</span></li>
+                    <li><strong><span class="lang-id">Tunjukkan "Resourcefulness"</span><span class="lang-en">Show "Resourcefulness"</span>:</strong> <span class="lang-id">Siapkan contoh spesifik saat Anda menghadapi masalah sulit dan menyelesaikannya dengan cara yang tidak biasa.</span><span class="lang-en">Prepare a specific example of when you faced a difficult problem and solved it in an unconventional way.</span></li>
+                    <li><strong><span class="lang-id">Fokus pada Dampak</span><span class="lang-en">Focus on Impact</span>:</strong> <span class="lang-id">Di akhir interview, ajukan pertanyaan cerdas seperti, <em>"Bagaimana peran ini akan berkontribusi langsung pada strategi pertumbuhan (Growth Advisory) klien eg.1 dalam 6 bulan ke depan?"</em></span><span class="lang-en">At the end of the interview, ask smart questions like, <em>"How will this role directly contribute to the growth advisory strategy for eg.1's clients in the next 6 months?"</em></span></li>
+                    <li><strong><span class="lang-id">Wawasan Global</span><span class="lang-en">Global Insight</span>:</strong> <span class="lang-id">Tunjukkan bahwa Anda mampu dan pernah bekerja dalam lingkungan multikultural atau dengan tim internasional.</span><span class="lang-en">Show that you are capable and have experience working in a multicultural environment or with international teams.</span></li>
+                    <li><strong><span class="lang-id">Lakukan Riset</span><span class="lang-en">Do Your Research</span>:</strong> <span class="lang-id">Cek profil karyawan eg.1 Global di LinkedIn untuk memahami latar belakang tim dan budaya mereka lebih dalam.</span><span class="lang-en">Check the LinkedIn profiles of eg.1 Global employees to better understand the team's background and their culture.</span></li>
+                </ul>
+
+                <h3 style="margin-top: 30px;"><span class="lang-id">Pertanyaan "Pembunuh" untuk Interviewer</span><span class="lang-en">"Killer" Questions for the Interviewer</span></h3>
+                <p><span class="lang-id">Tanyakan ini di akhir sesi untuk membuat mereka terkesan:</span><span class="lang-en">Ask these at the end of the session to impress them:</span></p>
+                <ul>
+                    <li><span class="lang-id">"Saya melihat eg.1 sangat kuat di The GC Index. Bagaimana kalian melihat penerapan kerangka GC Index ini untuk mengubah budaya kerja di industri tambang yang cenderung kaku dan tradisional?" (Ini pertanyaan level tinggi).</span><span class="lang-en">"I see that eg.1 is very strong on The GC Index. How do you see the application of this framework to change the work culture in the traditionally rigid mining industry?" (This is a high-level question).</span></li>
+                    <li><span class="lang-id">"Sebagai konsultan WFH, bagaimana saya bisa berkontribusi paling efektif dalam 30 hari pertama untuk mendukung proyek Growth Advisory di sektor energi yang sedang berjalan?"</span><span class="lang-en">"As a remote consultant, how can I contribute most effectively in the first 30 days to support an ongoing Growth Advisory project in the energy sector?"</span></li>
+                </ul>
+            </section>
+
+            <section class="card">
+                <h2><span class="lang-id">Menghubungkan Pengalaman Tambang Anda dengan eg.1</span><span class="lang-en">Connecting Your Mining Experience with eg.1</span></h2>
+                <p><span class="lang-id">Memiliki latar belakang di industri tambang emas memberikan Anda nilai jual yang unik jika Anda melamar ke perusahaan konsultan seperti eg.1 Global. Berikut adalah bedah bagaimana pengalaman tambang Anda bisa "dikawinkan" dengan kebutuhan mereka:</span><span class="lang-en">Having a background in the gold mining industry gives you a unique selling point when applying to a consulting firm like eg.1 Global. Here's a breakdown of how your mining experience can be "married" to their needs:</span></p>
+                
+                <h3 style="margin-top: 30px;"><span class="lang-id">1. Peran yang Cocok untuk Anda di eg.1 Global</span><span class="lang-en">1. Suitable Roles for You at eg.1 Global</span></h3>
+                <p><span class="lang-id">Meskipun eg.1 Global adalah perusahaan konsultan strategi dan pencarian eksekutif, mereka sering menangani klien dari sektor industri berat, energi, dan sumber daya alam. Posisi yang paling relevan untuk Anda meliputi:</span><span class="lang-en">Although eg.1 Global is a strategy consulting and executive search firm, they often handle clients from the heavy industry, energy, and natural resources sectors. The most relevant positions for you include:</span></p>
+                <ul>
+                    <li><strong>Sector Specialist / Industry Consultant:</strong> <span class="lang-id">Menggunakan keahlian teknis Anda (geologi, teknik pertambangan, atau operasional) untuk membantu klien mereka di industri pertambangan dalam merancang strategi pertumbuhan (Growth Advisory).</span><span class="lang-en">Using your technical expertise (geology, mining engineering, or operations) to help their clients in the mining industry design growth strategies (Growth Advisory).</span></li>
+                    <li><strong>Executive Search Associate (Mining & Resources):</strong> <span class="lang-id">Anda bisa menjadi "headhunter" spesialis. Karena Anda paham seluk-beluk tambang emas, Anda akan lebih mudah menilai apakah seorang kandidat direktur operasional atau kepala teknik benar-benar kompeten atau tidak.</span><span class="lang-en">You could become a specialist "headhunter." Because you understand the intricacies of gold mining, you will more easily assess whether an operational director or chief engineer candidate is truly competent.</span></li>
+                    <li><strong>Project Manager:</strong> <span class="lang-id">Industri tambang emas sangat kental dengan manajemen proyek yang ketat (safety, budget, schedule). Kemampuan ini sangat dicari untuk mengelola proyek konsultasi di eg.1 Global.</span><span class="lang-en">The gold mining industry is heavily reliant on strict project management (safety, budget, schedule). This skill is highly sought after for managing consulting projects at eg.1 Global.</span></li>
+                </ul>
+
+                <h3 style="margin-top: 30px;"><span class="lang-id">2. "Bahasa Tambang" yang Harus Anda Bawa saat Interview</span><span class="lang-en">2. The "Mining Language" You Should Bring to the Interview</span></h3>
+                <p><span class="lang-id">Gunakan istilah-istilah industri yang menunjukkan Anda ahli, lalu hubungkan dengan nilai eg.1 Global:</span><span class="lang-en">Use industry terms that show you are an expert, then connect them to eg.1 Global's values:</span></p>
+                <ul>
+                    <li><strong>ESG (Environmental, Social, and Governance):</strong> <span class="lang-id">Di tambang emas, isu lingkungan dan sosial sangat krusial. Sebutkan bagaimana Anda memastikan kepatuhan atau operasional yang berkelanjutan. Ini sejalan dengan nilai "Principled" milik mereka.</span><span class="lang-en">In gold mining, environmental and social issues are crucial. Mention how you ensure compliance or sustainable operations. This aligns with their "Principled" value.</span></li>
+                    <li><strong>Operational Excellence:</strong> <span class="lang-id">Ceritakan bagaimana Anda mengoptimalkan proses ekstraksi atau efisiensi alat berat. Ini menunjukkan Anda adalah orang yang "Resourceful" dan "Driven".</span><span class="lang-en">Talk about how you optimized extraction processes or heavy equipment efficiency. This shows you are "Resourceful" and "Driven."</span></li>
+                    <li><strong>Risk Management:</strong> <span class="lang-id">Tambang adalah bisnis berisiko tinggi. Kemampuan Anda memitigasi risiko fisik dan finansial di tambang emas sangat relevan bagi klien konsultan mereka.</span><span class="lang-en">Mining is a high-risk business. Your ability to mitigate physical and financial risks in gold mining is highly relevant to their consulting clients.</span></li>
+                </ul>
+
+                <h3 style="margin-top: 30px;"><span class="lang-id">3. Apa yang Sedang Mereka Butuhkan (Terkait Sektor Energi/Tambang)</span><span class="lang-en">3. What They Need Now (Regarding Energy/Mining Sector)</span></h3>
+                <p><span class="lang-id">Secara global, firma seperti eg.1 sedang membantu perusahaan bertransformasi menuju Digital Mining dan Sustainability. Jika Anda memiliki pengalaman dengan:</span><span class="lang-en">Globally, firms like eg.1 are helping companies transform towards Digital Mining and Sustainability. If you have experience with:</span></p>
+                <ul>
+                    <li><span class="lang-id">Implementasi teknologi baru di tambang.</span><span class="lang-en">Implementation of new technology in mining.</span></li>
+                    <li><span class="lang-id">Manajemen tim besar di area remote (site).</span><span class="lang-en">Management of large teams in remote sites.</span></li>
+                    <li><span class="lang-id">Negosiasi dengan stakeholder atau pemerintah terkait izin tambang.</span><span class="lang-en">Negotiation with stakeholders or government regarding mining permits.</span></li>
+                </ul>
+                <p><span class="lang-id">Maka, Anda adalah kandidat yang sangat kuat untuk posisi strategis di sana.</span><span class="lang-en">Then, you are a very strong candidate for a strategic position there.</span></p>
+
+                <h3 style="margin-top: 30px;"><span class="lang-id">Tips Tambahan</span><span class="lang-en">Additional Tips</span></h3>
+                <p><span class="lang-id">Jika interview ini untuk kantor mereka di Indonesia (atau klien tambang Indonesia), pastikan Anda menyebutkan pengalaman spesifik dengan perusahaan besar seperti PT Freeport Indonesia</span><span class="lang-en">If this interview is for their Indonesian office (or Indonesian mining clients), be sure to mention specific experience with large companies like PT Freeport Indonesia</span></p>
+
+                <h3 style="margin-top: 30px;"><span class="lang-id">4. Strategi Menjual "WFH Mining Consultant"</span><span class="lang-en">4. Strategy for Selling "Remote Mining Consultant"</span></h3>
+                <p><span class="lang-id">Karena posisi ini WFH (Remote), mereka akan ragu: "Bisakah orang tambang yang biasa di lapangan kerja efektif dari rumah?" Jawab keraguan itu sebelum ditanya:</span><span class="lang-en">Since this is a remote position, they will have doubts: "Can a mining person who is used to being in the field work effectively from home?" Address this doubt before it's asked:</span></p>
+                <ul>
+                    <li><strong><span class="lang-id">Akses Jaringan</span><span class="lang-en">Network Access</span>:</strong> <span class="lang-id">"Meskipun WFH, saya memiliki jejaring aktif dengan para Kepala Teknik Tambang (KTT) dan Direktur Operasional di Indonesia. Saya bisa mendapatkan market intelligence secara real-time lewat telepon/Zoom."</span><span class="lang-en">"Although I work remotely, I have an active network with Chief Mining Engineers (KTT) and Operational Directors in Indonesia. I can get real-time market intelligence via phone/Zoom."</span></li>
+                    <li><strong><span class="lang-id">Bridging the Gap</span><span class="lang-en">Bridging the Gap</span>:</strong> <span class="lang-id">"Saya bisa menjadi jembatan penerjemah. Klien tambang sering bicara teknis yang sulit dipahami konsultan umum. Saya akan menerjemahkan kebutuhan teknis mereka menjadi strategi bisnis untuk tim eg.1."</span><span class="lang-en">"I can be a translator. Mining clients often speak in technical terms that are difficult for general consultants to understand. I will translate their technical needs into business strategy for the eg.1 team."</span></li>
+                </ul>
+            </section>
+
+            <section class="card warning-card">
+                <h2><span class="lang-id">Jebakan & Catatan Penting</span><span class="lang-en">Pitfalls & Important Notes</span></h2>
+                <h3><span class="lang-id">1. Hindari Jebakan "Nama Kembar" (Sangat Penting!)</span><span class="lang-en">1. Avoid the "Twin Name" Trap (Very Important!)</span></h3>
+                <p><span class="lang-id">Saat Anda riset, Anda mungkin menemukan kode saham <strong>ASX: EG1</strong>. Hati-hati! Itu adalah kode saham untuk <strong>EverGreen Lithium</strong>, sebuah perusahaan tambang lithium di Australia. Jangan sampai tertukar.</span><span class="lang-en">When researching, you might find the stock code <strong>ASX: EG1</strong>. Be careful! That is the stock code for <strong>EverGreen Lithium</strong>, a lithium mining company in Australia. Do not get them confused.</span></p>
+                <p><span class="lang-id">Jika Anda melamar ke <strong>eg.1 Global (eg1global.com)</strong>, mereka adalah konsultan manajemen & rekrutmen, bukan perusahaan tambang itu sendiri. Pastikan juga tidak tertukar dengan nama serupa lain seperti English 1 (pendidikan) atau Energi Global Indonesia (energi).</span><span class="lang-en">If you are applying to <strong>eg.1 Global (eg1global.com)</strong>, they are a management & recruitment consultancy, not a mining company itself. Also, make sure not to confuse them with other similar names like English 1 (education) or Energi Global Indonesia (energy).</span></p>
+                <h3><span class="lang-id">2. Konteks Lamaran Anda</span><span class="lang-en">2. The Context of Your Application</span></h3>
+                <p><span class="lang-id">Kemungkinan besar Anda melamar untuk menjadi <strong>"Subject Matter Expert" (Ahli Materi)</strong> di eg.1 Global. Artinya, Anda akan bekerja di eg.1, tapi tugas Anda adalah memberi nasihat kepada klien-klien tambang mereka, atau membantu mereka mencari eksekutif tambang yang tepat.</span><span class="lang-en">You are most likely applying to be a <strong>"Subject Matter Expert"</strong> at eg.1 Global. This means you will work at eg.1, but your job is to advise their mining clients or help them find the right mining executives.</span></p>
+            </section>
+            </div>
+
+            <!-- --- ISI TAB: DOUGAL MURRAY --- -->
+            <div id="TabDougal" class="tab-content">
+                <div class="profile-header-tab">
+                    <img src="Dougal Murray.jpeg" alt="<span class='lang-id'>Foto Dougal Murray</span><span class='lang-en'>Photo by Dougal Murray</span>" class="profile-pic-small">
+                    <h2>Dougal Murray</h2>
+                    <p>Senior Associate, Growth Advisory</p>
+                </div>
+                <section class="card">
+                    <h2><span class="lang-id">Profil</span><span class="lang-en">Profile</span></h2>
+                    <ul>
+                        <li><strong><span class="lang-id">Latar Belakang:</span><span class="lang-en">Background:</span></strong> <span class="lang-id">Lulusan University of St Andrews (Skotlandia) jurusan Bahasa Inggris & Sejarah Modern.</span><span class="lang-en">Graduate of the University of St Andrews (Scotland) majoring in English & Modern History.</span></li>
+                        <li><strong><span class="lang-id">Karir:</span><span class="lang-en">Career:</span></strong> <span class="lang-id">Naik jabatan cukup cepat di eg.1 (dari Analyst -&gt; Associate -&gt; Senior Associate dalam ~3 tahun).</span><span class="lang-en">Move up fairly quickly in eg.1 (from Analyst -&gt; Associate -&gt; Senior Associate in ~3 years).</span></li>
+                        <li><strong><span class="lang-id">Fokus:</span><span class="lang-en">Focus:</span></strong> Enterprise Technology, Risk, & Sustainability.</li>
+                    </ul>
+                </section>
+                <section class="card">
+                    <h2><span class="lang-id">Psikologi Interview</span><span class="lang-en">Psychology Interview</span></h2>
+                    <p><span class="lang-id">Dia bukan orang teknis. Dia adalah <strong>Storyteller</strong>. Latar belakang sejarah/sastra membuatnya suka narasi yang kuat, bukan sekadar angka.</span><span class="lang-en">He's not a technical person. He's a <strong>Storyteller</strong>. His background in history and literature makes him adept at strong narratives, not just numbers.</span></p>
+                    <p><span class="lang-id">Dia peduli pada <strong>ESG (Sustainability)</strong>. Ini titik temu terkuat dengan Anda.</span><span class="lang-en">He cares about <strong>ESG (Sustainability)</strong>. This is the strongest point of contact with you.</span></p>
+                </section>
+                <section class="card">
+                    <h2><span class="lang-id">Strategi Pembuka (Ice Breaker)</span><span class="lang-en">Ice Breaker Strategy</span></h2>
+                    <p><span class="lang-id">"Saya melihat Anda lulusan St Andrews. Saya selalu kagum dengan bagaimana lulusan sejarah mampu melihat pola masa lalu untuk memprediksi masa depan. Di tambang, kami melakukan hal serupa dengan data geologi."</span><span class="lang-en">"I see you're a St Andrews graduate. I've always been amazed at how history graduates are able to look at past patterns to predict the future. In mining, we do something similar with geological data."</span></p>
+                </section>
+                <section class="card">
+                    <h2><span class="lang-id">Topik "Maut" untuk Dougal</span><span class="lang-en">"Death" Topic for Dougal</span></h2>
+                    <p><span class="lang-id">Bahas Sustainability/ESG di Tambang. Katakan: "Tantangan terbesar klien Anda di sektor tambang saat ini bukan cuma profit, tapi 'Social License to Operate'. Saya bisa membantu eg.1 memetakan risiko sosial ini untuk klien."</span><span class="lang-en">Discuss Sustainability/ESG in Mining. Say: "Your clients' biggest challenge in the mining sector today isn't just profit, but their 'Social License to Operate.' I can help eg.1 map these social risks for clients."</span></p>
+                </section>
+                <section class="card">
+                    <h2><span class="lang-id">Pertanyaan untuk Dougal</span><span class="lang-en">Questions for Dougal</span></h2>
+                    <p><strong><span class="lang-id">Pertanyaan:</span><span class="lang-en">Question:</span></strong> "Dougal, with your background in Modern History and your current focus on Enterprise Risk, how do you see the narrative of 'Sustainability' in the mining sector evolving over the next 5 years? Is it becoming a primary growth driver for eg.1's clients?"</p>
+                    <p><strong><span class="lang-id">Kenapa ini bagus?</span><span class="lang-en">Why is this good?</span></strong> <span class="lang-id">Ini menyentuh latar belakang pendidikannya (Sejarah) dan pekerjaannya sekarang (Risk). Ini menunjukkan Anda melihat tambang bukan cuma soal gali tanah, tapi soal keberlanjutan.</span><span class="lang-en">It touches on his educational background (History) and his current job (Risk). It shows you see mining as more than just digging, but also about sustainability.</span></p>
+                </section>
+                <section class="card">
+                    <h2><span class="lang-id">Ringkasan Strategi</span><span class="lang-en">Strategy Summary</span></h2>
+                    <div class="table-responsive">
+                        <table class="strategy-table">
+                            <thead>
+                                <tr>
+                                    <th><span class="lang-id">Nama</span><span class="lang-en">Name</span></th>
+                                    <th><span class="lang-id">Tipe Profil</span><span class="lang-en">Profile Type</span></th>
+                                    <th><span class="lang-id">Jangan Lakukan</span><span class="lang-en">Do not do it</span></th>
+                                    <th><span class="lang-id">Kunci Jawaban Anda</span><span class="lang-en">Your Answer Key</span></th>
+                                    <th><span class="lang-id">Contoh Cerita (Metode STAR)</span><span class="lang-en">Example Story (STAR Method)</span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Dougal</td>
+                                    <td>The Researcher</td>
+                                    <td><span class="lang-id">Jangan terlalu teknis (boring).</span><span class="lang-en">Don't be too technical (boring).</span></td>
+                                    <td><span class="lang-id">Hubungkan tambang dengan Risiko & Sustainability.</span><span class="lang-en">Connect mining with Risk & Sustainability.</span></td>
+                                    <td><span class="lang-id">Ceritakan saat Anda mengidentifikasi risiko lingkungan (Situasi), bertugas memitigasinya (Tugas), menerapkan sistem monitoring baru (Aksi), dan berhasil mengurangi potensi denda/insiden (Hasil).</span><span class="lang-en">Tell about a time when you identified an environmental risk (Situation), worked to mitigate it (Task), implemented a new monitoring system (Action), and successfully reduced potential fines/incidents (Result).</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+
+            <!-- --- ISI TAB: GABRIELLA MCDONNELL --- -->
+            <div id="TabGabriella" class="tab-content">
+                <div class="profile-header-tab">
+                    <img src="Gabriella McDonnel.jpeg" alt="<span class='lang-id'>Foto Gabriella McDonnell</span><span class='lang-en'>Photo Gabriella McDonnell</span>" class="profile-pic-small">
+                    <h2>Gabriella McDonnell</h2>
+                    <p>Associate, Growth Advisory</p>
+                </div>
+                <section class="card">
+                    <h2><span class="lang-id">Profil</span><span class="lang-en">Profile</span></h2>
+                    <ul>
+                        <li><strong><span class="lang-id">Latar Belakang:</span><span class="lang-en">Background:</span></strong> <span class="lang-id">Lulusan Sejarah dari Erasmus University Rotterdam. Fasih bahasa Spanyol.</span><span class="lang-en">History graduate from Erasmus University Rotterdam. Fluent in Spanish.</span></li>
+                        <li><strong><span class="lang-id">Keahlian:</span><span class="lang-en">Expertise:</span></strong> <span class="lang-id">Sebelumnya di Marketing & Komunikasi. Dia ahli dalam strategic messaging dan manajemen stakeholder.</span><span class="lang-en">Previously in Marketing & Communications. She specializes in strategic messaging and stakeholder management.</span></li>
+                        <li><strong><span class="lang-id">Gaya Kerja:</span><span class="lang-en">Work Style:</span></strong> <span class="lang-id">Sangat berorientasi pada hubungan (relationship-driven).</span><span class="lang-en">Very relationship-driven.</span></li>
+                    </ul>
+                </section>
+                <section class="card">
+                    <h2><span class="lang-id">Psikologi Interview</span><span class="lang-en">Psychology Interview</span></h2>
+                    <p><span class="lang-id">Sebagai mantan orang marketing, dia akan menilai apakah Anda bisa berkomunikasi dengan jelas. Orang tambang sering dianggap kaku/terlalu teknis; tunjukkan Anda beda.</span><span class="lang-en">As a former marketing professional, she'll assess your ability to communicate clearly. Miners are often perceived as rigid and overly technical; show them that you're different.</span></p>
+                    <p><span class="lang-id">Jika dia fasih Spanyol, dia mungkin menangani pasar Eropa/Amerika Latin.</span><span class="lang-en">If she is fluent in Spanish, she might be addressing the European/Latin American market.</span></p>
+                </section>
+                <section class="card">
+                    <h2><span class="lang-id">Strategi Pembuka</span><span class="lang-en">Opening Strategy</span></h2>
+                    <p><span class="lang-id">Tanyakan tentang transisi karirnya: "Transisi Anda dari Marketing ke Growth Advisory sangat menarik. Apakah itu membantu Anda melihat 'nilai jual' kandidat/perusahaan dengan lebih jernih?"</span><span class="lang-en">Ask about their career transition: "Your transition from Marketing to Growth Advisory was very interesting. Did it help you see the 'selling points' of candidates/companies more clearly?"</span></p>
+                </section>
+                <section class="card">
+                    <h2><span class="lang-id">Topik "Maut" untuk Gabriella</span><span class="lang-en">"Death" topic for Gabriella</span></h2>
+                    <p><span class="lang-id">Komunikasi. Katakan: "Dunia tambang penuh istilah teknis yang membingungkan orang awam. Kekuatan saya adalah menerjemahkan jargon teknis itu menjadi insight bisnis yang bisa dijual oleh tim Marketing atau Growth Advisory eg.1."</span><span class="lang-en">Communication. Say: "The mining world is full of technical terms that confuse the layperson. My strength is translating that technical jargon into marketable business insights for the Marketing or Growth Advisory team, e.g.,."</span></p>
+                </section>
+                <section class="card">
+                    <h2><span class="lang-id">Pertanyaan untuk Gabriella</span><span class="lang-en">Questions for Gabriella</span></h2>
+                    <p><strong><span class="lang-id">Pertanyaan:</span><span class="lang-en">Question:</span></strong> "Gabriella, you have a strong background in strategic messaging. In your experience at eg.1, what is the biggest challenge in 'translating' complex technical industries like Mining into a compelling growth story for professional services firms?"</p>
+                    <p><strong><span class="lang-id">Kenapa ini bagus?</span><span class="lang-en">Why is this good?</span></strong> <span class="lang-id">Ini mengakui keahliannya di bidang komunikasi. Anda memposisikan diri sebagai "penerjemah teknis" yang akan memudahkan pekerjaannya nanti.</span><span class="lang-en">It acknowledges their expertise in communications. You position yourself as a "technical translator," which will make their job easier later.</span></p>
+                </section>
+                <section class="card">
+                    <h2><span class="lang-id">Ringkasan Strategi</span><span class="lang-en">Strategy Summary</span></h2>
+                    <div class="table-responsive">
+                        <table class="strategy-table">
+                            <thead>
+                                <tr>
+                                    <th><span class="lang-id">Nama</span><span class="lang-en">Name</span></th>
+                                    <th><span class="lang-id">Tipe Profil</span><span class="lang-en">Profile Type</span></th>
+                                    <th><span class="lang-id">Jangan Lakukan</span><span class="lang-en">Do not do it</span></th>
+                                    <th><span class="lang-id">Kunci Jawaban Anda</span><span class="lang-en">Your Answer Key</span></th>
+                                    <th><span class="lang-id">Contoh Cerita (Metode STAR)</span><span class="lang-en">Example Story (STAR Method)</span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Gabriella</td>
+                                    <td>The Communicator</td>
+                                    <td><span class="lang-id">Jangan kaku/dingin.</span><span class="lang-en">Don't be stiff/cold.</span></td>
+                                    <td><span class="lang-id">Tunjukkan Anda luwes & bisa menyederhanakan bahasa teknis.</span><span class="lang-en">Show that you are flexible & can simplify technical language.</span></td>
+                                    <td><span class="lang-id">Ceritakan saat ada miskomunikasi antara tim teknis dan manajemen (Situasi), Anda ditugaskan membuat laporan yang mudah dipahami (Tugas), Anda membuat presentasi visual dengan analogi (Aksi), dan hasilnya proyek disetujui lebih cepat (Hasil).</span><span class="lang-en">Tell about a time when there was a miscommunication between the technical team and management (Situation), you were tasked with creating an easy-to-understand report (Task), you created a visual presentation with an analogy (Action), and as a result the project was approved faster (Result).</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+
+            <!-- --- ISI TAB: QING MAK --- -->
+            <div id="TabQing" class="tab-content">
+                <div class="profile-header-tab">
+                    <img src="Qing Mak.jpeg" alt="<span class='lang-id'>Foto Qing Mak</span><span class='lang-en'>Photo of Qing Mak</span>" class="profile-pic-small">
+                    <h2>Qing Mak</h2>
+                    <p>Director, Growth Advisory</p>
+                </div>
+                <section class="card">
+                    <h2><span class="lang-id">Profil</span><span class="lang-en">Profile</span></h2>
+                    <ul>
+                        <li><strong><span class="lang-id">Latar Belakang:</span><span class="lang-en">Background:</span></strong> <span class="lang-id">Lulusan London School of Economics (LSE). Sangat akademis dan tajam secara analitis.</span><span class="lang-en">Graduate of the London School of Economics (LSE). Highly academic and analytically sharp.</span></li>
+                        <li><strong><span class="lang-id">Status:</span><span class="lang-en">Status:</span></strong> <span class="lang-id">Veteran di eg.1 (sejak 2011/2012). Dia memimpin praktik Growth Advisory.</span><span class="lang-en">A veteran at eg.1 (since 2011/2012). She leads the Growth Advisory practice.</span></li>
+                        <li><strong><span class="lang-id">Minat Khusus:</span><span class="lang-en">Special Interests:</span></strong> <span class="lang-id">Sering menulis artikel tentang Mental Wellness, Diversity & Inclusion (D&I), dan Sustainability.</span><span class="lang-en">Often writes articles on Mental Wellness, Diversity & Inclusion (D&I), and Sustainability.</span></li>
+                    </ul>
+                </section>
+                <section class="card">
+                    <h2><span class="lang-id">Psikologi Interview</span><span class="lang-en">Interview Psychology</span></h2>
+                    <p><span class="lang-id">Dia mencari <strong>Pemikir Strategis</strong>. Jangan terjebak detail remeh. Dia ingin tahu bagaimana Anda menghasilkan uang atau menghemat uang untuk klien.</span><span class="lang-en">She is looking for a <strong>Strategic Thinker</strong>. Don't get bogged down in trivial details. She wants to know how you make or save money for clients.</span></p>
+                    <p><span class="lang-id">Dia sangat peduli pada <strong>well-being tim</strong> (topik artikelnya).</span><span class="lang-en">She cares deeply about <strong>team well-being</strong> (the topic of her articles).</span></p>
+                </section>
+                <section class="card">
+                    <h2><span class="lang-id">Strategi Pembuka</span><span class="lang-en">Opening Strategy</span></h2>
+                    <p><span class="lang-id">Kutip artikelnya (ini akan sangat impresif): "Saya sempat membaca tulisan Anda tentang 'Mental Wellness during the pandemic'. Itu sangat relevan bagi kami di industri tambang yang sering bekerja di lokasi terisolasi (remote site)."</span><span class="lang-en">Quote her article (this will be very impressive): "I recently read your piece on 'Mental Wellness during the pandemic.' It's highly relevant for us in the mining industry, where we often work on remote sites."</span></p>
+                </section>
+                <section class="card">
+                    <h2><span class="lang-id">Topik "Maut" untuk Qing Mak</span><span class="lang-en">"Killer" Topic for Qing Mak</span></h2>
+                    <p><span class="lang-id">Market Intelligence. Tanyakan: "Dari kacamata Direktur, area mana di sektor 'Natural Resources' yang menurut Anda paling kurang dilayani oleh data pasar saat ini? Di situlah saya ingin masuk dan mengisi kekosongan itu."</span><span class="lang-en">Market Intelligence. Ask: "From a Director's perspective, which area in the 'Natural Resources' sector do you think is currently most underserved by market data? That's where I'd like to come in and fill that gap."</span></p>
+                </section>
+                <section class="card">
+                    <h2><span class="lang-id">Pertanyaan untuk Qing</span><span class="lang-en">Question for Qing</span></h2>
+                    <p><strong><span class="lang-id">Pertanyaan:</span><span class="lang-en">Question:</span></strong> "Qing, I've read some of your insights regarding mental wellness and diversity in the workplace. How does eg.1 Global maintain this culture of well-being within a high-pressure Growth Advisory environment, especially for remote consultants like the role I am applying for?"</p>
+                    <p><strong><span class="lang-id">Kenapa ini bagus?</span><span class="lang-en">Why this is good:</span></strong> <span class="lang-id">Ini adalah "Ultimate Move". Menunjukkan Anda membaca tulisannya tentang Mental Wellness akan membuatnya sangat terkesan. Ini juga menunjukkan Anda peduli pada budaya kerja, bukan cuma gaji.</span><span class="lang-en">This is the "Ultimate Move." Showing you've read her writing on Mental Wellness will be very impressive. It also shows you care about work culture, not just salary.</span></p>
+                </section>
+                <section class="card">
+                    <h2><span class="lang-id">Ringkasan Strategi</span><span class="lang-en">Strategy Summary</span></h2>
+                    <div class="table-responsive">
+                        <table class="strategy-table">
+                            <thead>
+                                <tr>
+                                    <th><span class="lang-id">Nama</span><span class="lang-en">Name</span></th>
+                                    <th><span class="lang-id">Tipe Profil</span><span class="lang-en">Profile Type</span></th>
+                                    <th><span class="lang-id">Jangan Lakukan</span><span class="lang-en">Do not do it</span></th>
+                                    <th><span class="lang-id">Kunci Jawaban Anda</span><span class="lang-en">Your Answer Key</span></th>
+                                    <th><span class="lang-id">Contoh Cerita (Metode STAR)</span><span class="lang-en">Example Story (STAR Method)</span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Qing Mak</td>
+                                    <td>The Strategist</td>
+                                    <td><span class="lang-id">Jangan terlihat pasif.</span><span class="lang-en">Don't appear passive.</span></td>
+                                    <td><span class="lang-id">Tunjukkan visi makro industri tambang & kepedulian pada tim.</span><span class="lang-en">Show a macro vision of the mining industry & care for the team.</span></td>
+                                    <td><span class="lang-id">Ceritakan saat perusahaan menghadapi inefisiensi biaya (Situasi), Anda ditugaskan mencari solusi (Tugas), Anda mengusulkan dan memimpin implementasi sistem baru (Aksi), dan hasilnya ada penghematan biaya operasional sebesar X% (Hasil).</span><span class="lang-en">Tell about a time the company faced cost inefficiencies (Situation), you were tasked with finding a solution (Task), you proposed and led the implementation of a new system (Action), and the result was an operational cost saving of X% (Result).</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+
+        </main>
+
+        <footer class="site-footer">
+            <span class="lang-id">© 2026 Kit Persiapan Wawancara. oleh Sipino</span><span class="lang-en">© 2026 Interview Preparation Kit. by Sipino</span>
+        </footer>
+    </div>
+
+    <a href="#" class="back-to-top">↑</a>
+    <script>
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            
+            // Sembunyikan semua elemen dengan class="tab-content"
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            
+            // Hapus class "active" dari semua elemen dengan class="tab-button"
+            tablinks = document.getElementsByClassName("tab-button");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            
+            // Tampilkan tab saat ini, dan tambahkan class "active" ke tombol yang membuka tab
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+
+        // --- SCRIPT UNTUK BACK-TO-TOP ---
+        const backToTopButton = document.querySelector(".back-to-top");
+
+        window.addEventListener("scroll", () => {
+            if (window.pageYOffset > 300) { // Show button after 300px of scroll
+                backToTopButton.classList.add("show");
+            } else {
+                backToTopButton.classList.remove("show");
+            }
+        });
+
+        backToTopButton.addEventListener("click", (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        });
+
+        // --- SCRIPT UNTUK BAHASA ---
+        function setLanguage(lang) {
+            if (lang === 'en') {
+                document.body.classList.add('lang-en-active');
+            } else {
+                document.body.classList.remove('lang-en-active');
+            }
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+            localStorage.setItem('preferredLanguage', lang);
+        }
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => setLanguage(e.target.dataset.lang));
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('preferredLanguage') || 'id';
+            setLanguage(savedLang);
+        });
+    </script>
+</body>
+</html>

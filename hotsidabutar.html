@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strategic Profile: Hot Asi Yohannes Sidabutar</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: #f8f9fa;
+            color: #212529;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 950px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .main-header {
+            background-color: #0a2342; /* Dark Navy */
+            color: #ffffff;
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+        }
+
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid #ffffff;
+            object-fit: cover;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .main-header h1 {
+            margin: 0;
+            font-weight: 700;
+            font-size: 2.2em;
+        }
+        
+        .main-header p {
+            margin: 10px 0 0;
+            opacity: 0.9;
+            font-size: 1.1em;
+        }
+
+        .nav-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #00b4d8;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .nav-button:hover {
+            background-color: #0096b3;
+            transform: translateY(-2px);
+        }
+
+        .main-content {
+            padding: 30px;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9ecef;
+            border-left: 5px solid #00b4d8; /* Light Blue/Cyan Accent */
+            margin-bottom: 30px;
+            padding: 25px;
+            border-radius: 8px;
+        }
+
+        .card h2 {
+            color: #0a2342; /* Dark Navy */
+            margin-top: 0;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            color: #0a2342;
+            margin-top: 25px;
+        }
+
+        .card ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .card ul li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .card ul li::before {
+            content: '»';
+            color: #00b4d8;
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .quote {
+            border-left: 3px solid #6c757d;
+            padding-left: 15px;
+            margin: 10px 0;
+            font-style: italic;
+        }
+        .quote.good {
+            border-left-color: #28a745;
+        }
+        .quote.bad {
+            border-left-color: #dc3545;
+        }
+
+        /* --- RESPONSIVE DESIGN --- */
+        @media (max-width: 768px) {
+            body {
+                padding: 5px;
+            }
+            .main-header {
+                padding: 30px 15px;
+            }
+            .main-header h1 {
+                font-size: 1.8em;
+            }
+            .main-content {
+                padding: 15px;
+            }
+            .nav-button {
+                padding: 8px 15px;
+                font-size: 0.9em;
+            }
+            .card h2 {
+                font-size: 1.4em;
+            }
+        }
+
+        /* --- LANGUAGE SWITCHER --- */
+        .header-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+            margin-top: 20px;
+        }
+        .lang-switcher {
+            display: flex;
+            border: 1px solid #00b4d8;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .lang-btn {
+            background-color: transparent;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .lang-btn:hover {
+            background-color: #0096b3;
+        }
+        .lang-btn.active {
+            background-color: #00b4d8;
+        }
+
+        /* --- LANGUAGE TOGGLING --- */
+        .lang-en { display: none; }
+        body.lang-en-active .lang-id { display: none; }
+        body.lang-en-active .lang-en { display: inline; }
+        }
+
+        /* --- FOOTER & BACK-TO-TOP --- */
+        .site-footer {
+            text-align: center;
+            padding: 20px 30px;
+            color: #6c757d;
+            font-size: 0.9em;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #0a2342;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            font-size: 1.2em;
+            text-decoration: none;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s, background-color 0.3s;
+            z-index: 1000;
+        }
+        .back-to-top:hover {
+            background-color: #00b4d8;
+        }
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header class="main-header">
+            <img src="hotsidabutar.jpeg" alt="<span class='lang-id'>Foto Hot Asi Yohannes Sidabutar</span><span class='lang-en'>Photo of Hot Asi Yohannes Sidabutar</span>" class="profile-pic">
+            <h1><span class="lang-id">Hot Asi Yohannes Sidabutar</span><span class="lang-en">Hot Asi Yohannes Sidabutar</span></h1>
+            <p><span class="lang-id">Profil Strategis & Nilai Penasihat untuk eg.1 Global</span><span class="lang-en">Strategic Profile & Advisor Value for eg.1 Global</span></p>
+            <div class="header-controls">
+                <div class="lang-switcher">
+                    <button class="lang-btn" data-lang="id">ID</button>
+                    <button class="lang-btn" data-lang="en">EN</button>
+                </div>
+                <a href="index.html" class="nav-button"><span class="lang-id">← Kembali ke Dasbor Strategi</span><span class="lang-en">← Back to Strategy Dashboard</span></a>
+            </div>
+        </header>
+
+        <main class="main-content">
+            
+            <section class="card">
+                <h2><span class="lang-id">Ringkasan Eksekutif</span><span class="lang-en">Executive Summary</span></h2>
+                <p><span class="lang-id">Keahlian Hot Asi Yohannes Sidabutar sebagai Spesialis Teknologi Pertambangan di bidang IoT, otomatisasi, dan infrastruktur jaringan menjembatani kesenjangan antara strategi tingkat tinggi dan realitas operasional bagi klien eg.1 Global di sektor energi dan pertambangan.</span><span class="lang-en">Hot Asi Yohannes Sidabutar's expertise as a Mining Technology Specialist in IoT, automation, and network infrastructure bridges the gap between high-level strategy and operational reality for eg.1 Global's clients in the energy and mining sectors.</span></p>
+                <p><span class="lang-id">Sebagai Penasihat, profil ini memberikan informasi pasar yang penting dan validasi teknis terkait tren Industri 4.0 dan talenta kunci di Asia Tenggara, bertindak sebagai Pakar Bidang untuk klien korporat. Kombinasi unik antara wawasan teknis yang mendalam dan pengalaman lapangan sangat dicari untuk memvalidasi talenta atau memberikan informasi pasar di kawasan Indonesia/ASEAN.</span><span class="lang-en">As an Advisor, this profile provides crucial market intelligence and technical validation regarding Industry 4.0 trends and key talent in Southeast Asia, acting as a Subject Matter Expert for corporate clients. His unique combination of deep technical insight and field experience is highly sought after for validating talent or providing market intelligence in the Indonesia/ASEAN region.</span></p>
+            </section>
+
+            <section class="card">
+                <h2><span class="lang-id">Nilai Strategis untuk eg.1 Global</span><span class="lang-en">Strategic Value to eg.1 Global</span></h2>
+                <p><span class="lang-id">Merekrut profil seperti ini adalah langkah taktis bagi perusahaan seperti eg.1 Global. Berikut analisis lebih mendalam mengapa profil ini sangat berharga:</span><span class="lang-en">Recruiting a profile like this is a tactical move for a firm like eg.1 Global. Here's a deeper analysis of why this profile is highly valuable:</span></p>
+                <ul>
+                    <li><strong><span class="lang-id">Jembatan antara Teknologi dan Industri Berat:</span><span class="lang-en">Bridge between Technology and Heavy Industry:</span></strong> <span class="lang-id">Dunia pertambangan/energi sedang mengalami transformasi digital besar-besaran (Industri 4.0). Profil dengan latar belakang Teknologi Pertambangan dan IoT adalah komoditas langka, sangat penting untuk memberikan nasihat kepada klien seperti BP atau Arcadis tentang kepemimpinan digital.</span><span class="lang-en">The mining/energy world is undergoing a massive digital transformation (Industry 4.0). A profile with a background in Mining Technology and IoT is a rare commodity, essential for advising clients like BP or Arcadis on digital leadership.</span></li>
+                    <li><strong><span class="lang-id">Wawasan Lokal untuk Ekspansi Global:</span><span class="lang-en">Local Insight for Global Expansion:</span></strong> <span class="lang-id">Memahami pasar Indonesia—raksasa pertambangan—membutuhkan lebih dari sekadar statistik. Profil ini bertindak sebagai "kompas," memberikan pengetahuan langsung tentang peraturan lokal, jaringan profesional, dan realitas operasional untuk memandu strategi talenta eg.1 di ASEAN.</span><span class="lang-en">Understanding the Indonesian market—a mining giant—requires more than statistics. This profile acts as a "compass," providing on-the-ground knowledge of local regulations, professional networks, and operational realities to guide eg.1's talent strategy in ASEAN.</span></li>
+                    <li><strong><span class="lang-id">Pra-Penilaian & Validasi Teknis:</span><span class="lang-en">Pre-Assessment & Technical Validation:</span></strong> <span class="lang-id">Dengan pengalaman manajerial, profil ini dapat melakukan wawancara teknis mendalam, menilai apakah kandidat tingkat tinggi benar-benar memahami operasi yang kompleks atau hanya pandai dalam presentasi. Ini adalah fungsi "penilai teknis" yang sangat penting.</span><span class="lang-en">With managerial experience, this profile can conduct in-depth technical interviews, assessing whether high-level candidates truly understand complex operations or are just good at presenting. This is a critical "technical judge" function.</span></li>
+                    <li><strong><span class="lang-id">Keahlian Khusus:</span><span class="lang-en">Niche Expertise:</span></strong> <span class="lang-id">Ini adalah profil "Spesialis", bukan "Generalis". Keahlian mendalam ini melengkapi panel penasihat eg.1, memperkuat presentasi mereka kepada klien di sektor Teknik dan Sumber Daya Alam.</span><span class="lang-en">This is a "Specialist" profile, not a "Generalist." This deep expertise complements eg.1's advisory panel, strengthening their pitches to clients in the Engineering and Natural Resources sectors.</span></li>
+                    <li><strong><span class="lang-id">Keselarasan dengan Visi Berbasis Data:</span><span class="lang-en">Alignment with Data-Driven Vision:</span></strong> <span class="lang-id">Latar belakang di bidang IoT dan TI sangat selaras dengan metodologi berbasis data eg.1, membantu mereka membangun Pemetaan Pasar berbasis teknologi yang lebih akurat di sektor-sektor penting.</span><span class="lang-en">The background in IoT and IT aligns perfectly with eg.1's data-driven methodology, helping them build more accurate, technology-based Market Mapping in critical sectors.</span></li>
+                </ul>
+            </section>
+
+            <section class="card">
+                <h2><span class="lang-id">Analisis Lebih Mendalam: Peran "Penjaga Gerbang" & "Intelijen"</span><span class="lang-en">Deeper Analysis: The "Gatekeeper" & "Intelligence" Role</span></h2>
+                <ul>
+                    <li><strong><span class="lang-id">Penentu Kualifikasi Teknis:</span><span class="lang-en">Technical Gatekeeper:</span></strong> <span class="lang-id">Ketika klien membutuhkan COO baru, konsultan di London memahami manajemen, tetapi tidak memahami detail spesifik IoT Pertambangan. Profil ini bertindak sebagai penentu kualifikasi teknis untuk memvalidasi kompetensi kandidat di dunia nyata, mencegah kesalahan perekrutan yang mahal.</span><span class="lang-en">When a client needs a new COO, consultants in London understand management, but not the specifics of Mining IoT. This profile acts as the technical gatekeeper to validate a candidate's real-world competence, preventing costly hiring mistakes.</span></li>
+                    <li><strong><span class="lang-id">Pengumpulan Intelijen:</span><span class="lang-en">Intelligence Gathering:</span></strong> <span class="lang-id">Di industri berat ASEAN, informasi paling berharga tidak ada di Google. Profil ini memberikan akses ke komunitas profesional teknis, bertindak sebagai "radar" untuk mengidentifikasi bintang-bintang baru dan kandidat pasif yang tidak sedang aktif mencari pekerjaan.</span><span class="lang-en">In the heavy industry of ASEAN, the most valuable information isn't on Google. This profile provides access to a technical professional community, acting as a "radar" to identify rising stars and passive candidates who aren't actively looking for jobs.</span></li>
+                    <li><strong><span class="lang-id">Spesialis Transformasi Digital:</span><span class="lang-en">Digital Transformation Specialist:</span></strong> <span class="lang-id">Seiring industri bergerak menuju Energi Hijau dan Digitalisasi, eg.1 dapat memanfaatkan profil ini untuk menjual layanan "Penasihat Kepemimpinan Digital", didukung oleh seorang penasihat yang memahami cara mengintegrasikan IoT ke dalam operasi pertambangan.</span><span class="lang-en">As the industry moves toward Green Energy and Digitalization, eg.1 can leverage this profile to sell "Digital Leadership Advisory" services, backed by an advisor who understands how to integrate IoT into mining operations.</span></li>
+                    <li><strong><span class="lang-id">Mitigasi Risiko untuk Klien Global:</span><span class="lang-en">Risk Mitigation for Global Clients:</span></strong> <span class="lang-id">Profil ini bertindak sebagai "Mitigator Risiko," meyakinkan klien global bahwa strategi talenta selaras dengan realitas operasional pasar Indonesia, memberikan "stempel validasi" yang krusial pada keputusan mereka.</span><span class="lang-en">This profile acts as a "Risk Mitigator," assuring global clients that talent strategies are aligned with the operational realities of the Indonesian market, providing a crucial "stamp of validation" on their decisions.</span></li>
+                </ul>
+                 <p><strong><span class="lang-id">Kesimpulan Strategis:</span><span class="lang-en">Strategic Conclusion:</span></strong> <span class="lang-id">eg.1 Global tidak hanya merekrut seorang karyawan; mereka mengakuisisi <strong>Kredibilitas dan Spesialisasi</strong>. Profil ini membuat eg.1 tampak lebih cerdas dan lebih "lokal" di mata klien global mereka saat membahas proyek di Asia Tenggara.</span><span class="lang-en">eg.1 Global isn't just hiring an employee; they are acquiring <strong>Credibility and Specialization</strong>. This profile makes eg.1 appear smarter and more "local" to their global clients when discussing projects in Southeast Asia.</span></p>
+            </section>
+
+            <section class="card">
+                <h2><span class="lang-id">Panduan Komunikasi Taktis (untuk Mitra di London)</span><span class="lang-en">Tactical Communication Guide (for London Partners)</span></h2>
+                <p><span class="lang-id">Berkomunikasi dengan mitra level C-suite membutuhkan pergeseran dari detail teknis ke dampak bisnis. Berikut cara membingkai keahlian Anda secara strategis:</span><span class="lang-en">Communicating with C-suite level partners requires a shift from technical details to business impact. Here’s how to frame your expertise strategically:</span></p>
+
+                <h3><span class="lang-id">1. Gunakan Bahasa "Output & Hasil"</span><span class="lang-en">1. Use "Output & Outcome" Language</span></h3>
+                <p class="quote bad"><strong><span class="lang-id">Salah:</span><span class="lang-en">Wrong:</span></strong> "I installed an IoT monitoring system on the mining truck fleet."</p>
+                <p class="quote good"><strong><span class="lang-id">Benar (Strategis):</span><span class="lang-en">Right (Strategic):</span></strong> "I integrated Real-Time Data Analytics that successfully reduced operational costs by 15% and improved fuel efficiency across the entire fleet."</p>
+
+                <h3><span class="lang-id">2. Hubungkan Pengetahuan Teknis dengan Intelijen Pasar</span><span class="lang-en">2. Connect Technical Knowledge to Market Intelligence</span></h3>
+                <p><span class="lang-id">Gunakan keahlian Anda untuk memberikan wawasan kompetitif. Contohnya:</span><span class="lang-en">Use your expertise to provide competitive insights. For example:</span></p>
+                <p class="quote">"Technically, Company A is currently leading in mine automation in Indonesia. If our client wants to win in this region, they need a leader with a proven track record in Digital Transformation, like person X at that company."</p>
+
+                <h3><span class="lang-id">3. Ringkas dan Langsung ke Inti (Bottom Line Up Front)</span><span class="lang-en">3. Be Concise (Bottom Line Up Front)</span></h3>
+                <p><span class="lang-id">Mulai dengan kesimpulan, lalu berikan detail jika ditanya. Contohnya:</span><span class="lang-en">Start with the conclusion, then provide details if asked. For example:</span></p>
+                <p class="quote">"Based on my technical assessment, this candidate scores high on Innovation (GC Index), but lacks understanding of on-site Safety Protocols. My recommendation: they will need mentorship in the first 3 months."</p>
+
+                <h3><span class="lang-id">4. Gunakan Terminologi "The GC Index"</span><span class="lang-en">4. Use "The GC Index" Terminology</span></h3>
+                <p><span class="lang-id">Bingkai masalah teknis melalui lensa budaya mereka. Contohnya:</span><span class="lang-en">Frame technical problems through their cultural lens. For example:</span></p>
+                <p class="quote">"Operationally, this process requires a strong 'Implementer' to execute the existing tech vision and prevent cost leakage."</p>
+
+                <h3><span class="lang-id">5. Tunjukkan Kecerdasan Budaya (CQ)</span><span class="lang-en">5. Show Cultural Intelligence (CQ)</span></h3>
+                <p><span class="lang-id">Jembatani kesenjangan antara kebijakan London dan realitas lapangan. Contohnya:</span><span class="lang-en">Bridge the gap between London policy and on-the-ground reality. For example:</span></p>
+                <p class="quote">"<span class="lang-id">Meskipun dari London hal ini tampak mudah, konektivitas merupakan kendala utama di lokasi seperti Morowali. Solusi strategisnya adalah menemukan pemimpin yang memahami infrastruktur lokal untuk memastikan proyek IoT ini berhasil.</span><span class="lang-en">While this looks straightforward from London, connectivity is a major obstacle on-site in places like Morowali. The strategic solution is to find a leader who understands local infrastructure to ensure this IoT project succeeds.</span>"</p>
+
+                <p><strong><span class="lang-id">Catatan Akhir:</span><span class="lang-en">Final Note:</span></strong> <span class="lang-id">Bersikaplah "Tegas." Dalam budaya profesional London, terlalu percaya diri tanpa data dianggap arogan, tetapi terlalu rendah hati dipandang sebagai ketidakmampuan. Nyatakan pendapat Anda dengan jelas, didukung oleh data yang kuat, dengan tenang dan percaya diri.</span><span class="lang-en">Be "Assertive." In London's professional culture, over-confidence without data is arrogance, but being too humble is seen as incompetence. State your opinions clearly, backed by strong data, in a calm and confident manner.</span></p>
+            </section>
+
+        </main>
+
+        <footer class="site-footer">
+            <span class="lang-id">© 2026 Kit Persiapan Wawancara. oleh Sipino</span><span class="lang-en">© 2026 Interview Preparation Kit. by Sipino</span>
+        </footer>
+    </div>
+
+    <a href="#" class="back-to-top">↑</a>
+    <script>
+        // --- SCRIPT UNTUK BACK-TO-TOP ---
+        const backToTopButton = document.querySelector(".back-to-top");
+
+        window.addEventListener("scroll", () => {
+            if (window.pageYOffset > 300) { // Show button after 300px of scroll
+                backToTopButton.classList.add("show");
+            } else {
+                backToTopButton.classList.remove("show");
+            }
+        });
+
+        backToTopButton.addEventListener("click", (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        });
+
+        // --- SCRIPT UNTUK BAHASA ---
+        function setLanguage(lang) {
+            if (lang === 'en') {
+                document.body.classList.add('lang-en-active');
+            } else {
+                document.body.classList.remove('lang-en-active');
+            }
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+            localStorage.setItem('preferredLanguage', lang);
+        }
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => setLanguage(e.target.dataset.lang));
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('preferredLanguage') || 'id';
+            setLanguage(savedLang);
+        });
+    </script>
+</body>
+</html>
